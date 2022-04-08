@@ -6,3 +6,4 @@ admin.site.register(User)
 admin.site.register(Team)
 admin.site.register(Session)
 admin.site.register(Chat)
+admin.site.site_header = 'AirBoard Admin Panel'

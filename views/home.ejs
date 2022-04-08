@@ -136,6 +136,13 @@
         </script>
 
         <script>
+            if(document.cookie.valueOf('authtoken') === ''){
+                alert("Login Required");
+                window.location.href = "/login"
+            }
+        </script>
+
+        <script>
             document.getElementById("create_team").onclick = () => {
                 var team_name = prompt("Enter team name")
                 var api_url = "<%= apiurl %>/api/teams/"
