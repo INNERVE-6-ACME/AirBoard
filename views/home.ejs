@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="stylesheets/home.css">
 </head>
 <style>
-    
-  #mybutton {
-      position: relative;
-      margin-top:1%;
-    margin-right:3%;
-  }
+    #mybutton {
+        position: relative;
+        margin-top: 1%;
+        margin-right: 3%;
+    }
 </style>
+
 <body>
 
 </body>
@@ -37,7 +37,6 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -78,7 +77,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="mybutton">
             <button id="create_team" class="btn btn-outline-secondary">Create Team</button>
         </div>
@@ -96,6 +95,10 @@
                     var par = document.getElementById("content")
                     console.log(teams);
                     for (var i = 0; i < teams.length; i++) {
+                        var start = teams[i].created_at.split('T')[0].split("-")
+                        start = new Date(start[0], start[1]-1, start[2])
+                        var month = start.toLocaleString("en-us",{month:'long'});
+                        var date = start.getDate()
                         var el = `<div class="col-lg-6">
                         <div class="card card-margin">
                             <div class="card-header no-border">
@@ -105,8 +108,8 @@
                                 <div class="widget-49">
                                     <div class="widget-49-title-wrapper">
                                         <div class="widget-49-date-success">
-                                            <span class="widget-49-date-day">22</span>
-                                            <span class="widget-49-date-month">apr</span>
+                                            <span class="widget-49-date-day">${date}</span>
+                                            <span class="widget-49-date-month">${month}</span>
                                         </div>
                                         <div class="widget-49-meeting-info">
                                             <span class="widget-49-pro-title">PRO-027865 Opera module</span>
@@ -136,27 +139,27 @@
             document.getElementById("create_team").onclick = () => {
                 var team_name = prompt("Enter team name")
                 var api_url = "<%= apiurl %>/api/teams/"
-                fetch(api_url,{
+                fetch(api_url, {
                     method: "POST",
-                    headers: { 
-                        "Authorization": `Token ${document.cookie.valueOf('authtoken').split("authtoken=")[1].split(";")[0]}` ,
+                    headers: {
+                        "Authorization": `Token ${document.cookie.valueOf('authtoken').split("authtoken=")[1].split(";")[0]}`,
                         "Content-type": "application/json"
                     },
                     body: JSON.stringify({
                         team_name: team_name
                     })
                 })
-                .then(response => {
-                    response.json()
-                    .then(data => {
-                        if (response.status === 201 || response.status === 200) {
-                            window.location.reload()
-                        }else{
-                            alert("You can't create a team")
-                        }
+                    .then(response => {
+                        response.json()
+                            .then(data => {
+                                if (response.status === 201 || response.status === 200) {
+                                    window.location.reload()
+                                } else {
+                                    alert("You can't create a team")
+                                }
+                            })
                     })
-                })
-                .then(data => console.log(data))
+                    .then(data => console.log(data))
             }
         </script>
 
