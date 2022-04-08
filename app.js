@@ -28,7 +28,7 @@ app.get("/login",(req, res) => {
 
 
 app.get("/:room",(req,res)=>{
-    res.render("room",{roomId:req.params.room,title:"Airboard", ws_url:process.env.WS_URL+"/ws/board/1"})
+    res.render("room",{roomId:req.params.room,title:"Airboard"})
 })
 
 app.get("/session/:session_id",(req,res) => {
@@ -45,8 +45,3 @@ io.on("connection",socket=>{
     })
 })
 server.listen(process.env.port||3000)
-
-app.use(express.static(__dirname + '/public'));
-
-
-app.listen(3300)
