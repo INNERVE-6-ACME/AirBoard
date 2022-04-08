@@ -1,11 +1,12 @@
 var obj;
 var prevIndex={visiblity:undefined,x:0,y:0,z:0}
 var prevThumb = {visiblity:undefined,x:0,y:0,z:0}
+let trackerSize=1
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
+//let canvasCtx2=document.getElementById("#canvas-wrapper").getContext("2d");
 //require("dotenv").config()
-
 var ws = new WebSocket(ws_url+"/ws/board/" + roomId)
 const camera = new Camera(videoElement, {
   onFrame: async () => {
@@ -50,11 +51,21 @@ function onResults(results) {
     //var ring= results.multiHandLandmarks[0][16]
     //var little =results.multiHandLandmarks[0][20]
     var pos = fingersUp(res4,results.multiHandLandmarks)
-    canvasCtx.beginPath();
-    console.log(res2.x, res2.y);
-    canvasCtx.arc(res2.x * 1280, res2.y * 720, 10, 0, 2 * Math.PI);
-    canvasCtx.stroke();
+    var canvasCtx2=null
+    if(document.getElementById("defaultCanvas0") != null)
+     canvasCtx2=document.getElementById("defaultCanvas0").getContext("2d");
+    if(pos[1]===1 && pos[2]===1 && canvasCtx2!=null)
+    {
+      canvasCtx2.beginPath();
+      //console.log(res2.x, res2.y);
+      canvasCtx2.arc((1 - res2.x) * 1280, res2.y * 720, 10, 0, 2 * Math.PI);
+      strokeWeight(trackerSize)
+      canvasCtx2.stroke()
+      canvasCtx2.restore()
+    }
+    else{
     mouseDragged(res1,res2,res4)
+    }
     // socket2.emit()
      prevIndex=res2 
     prevThumb = res4
@@ -132,5 +143,9 @@ function(){
     saveCanvas(canvas,"sketch","png");
 });
 
+<<<<<<< HEAD
 // *************************************************************************** */
 
+=======
+// *************************************************************************** */
+>>>>>>> 3adefa98e6c797eea8a4da162e783d89092d5f65
