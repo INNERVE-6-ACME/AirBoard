@@ -1,7 +1,9 @@
-from channels.consumer import AsyncConsumer
+from tokenize import Token
+from channels.consumer import AsyncConsumer, SyncConsumer
 from channels.exceptions import StopConsumer
-from channels.db import database_sync_to_async
+from asgiref.sync import async_to_sync
 from api.models import Team, Chat
+from rest_framework.authtoken.models import Token
 import json
 
 class BoardConsumer(AsyncConsumer):
@@ -42,41 +44,44 @@ class BoardConsumer(AsyncConsumer):
 
 
 
-class ChatConsumer(AsyncConsumer):
-    async def websocket_connect(self, event):
+class ChatConsumer(SyncConsumer):
+    def websocket_connect(self, event):
         self.group_name = str(self.scope['url_route']['kwargs']['team_id'])
-        self.user = self.scope['user']
-        await self.channel_layer.group_add(
+        async_to_sync(self.channel_layer.group_add)(
             self.group_name, 
             self.channel_name
         )
-        await self.send({
+        self.send({
             'type': 'websocket.accept'
         })
     
 
-    async def websocket_receive(self, event):
+    def websocket_receive(self, event):
         data = json.loads(event['text']) # use if we need to store in db
-        team = database_sync_to_async(Team.objects.get(id = self.group_name))
-        chat = database_sync_to_async(Chat(message=data['msg'], team=team, user=self.user))
+        team = Team.objects.get(id = self.group_name)
+        user = Token.objects.get(key = data['token']).user
+        chat = Chat(message=data['message'], team=team, user=user)
         chat.save()
-        await self.channel_layer.group_send(self.group_name, {
+        data = json.loads(event['text'])
+        data['user'] = user.username
+        del data['token']
+        async_to_sync(self.channel_layer.group_send)(self.group_name, {
             'type': 'chat.message',
-            'message': event['text'],
+            'message': json.dumps(data),
             'sender_channel_name': self.channel_name
         })
 
 
-    async def chat_message(self, event):
+    def chat_message(self, event):
         if self.channel_name != event['sender_channel_name']:
-            await self.send({
+            self.send({
                 "type": "websocket.send",
                 'text': event['message']
             })
 
 
-    async def websocket_disconnect(self, event):
-        await (self.channel_layer.group_discard)(
+    def websocket_disconnect(self, event):
+        async_to_sync(self.channel_layer.group_discard)(
             self.group_name, 
             self.channel_name
         )
