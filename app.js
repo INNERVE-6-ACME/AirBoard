@@ -16,6 +16,10 @@ app.get("/video",(req,res)=>{
 //     res.render("track")
 // })
 
+app.get("/sessions/:team_id",(req, res) => {
+    res.render("sessions", {apiurl:process.env.API_URL, team_id:req.params.team_id});
+  })
+
 app.get("/paint",(req,res)=>{
     res.render("paint",{title:"Airboard",ws_url:process.env.WS_URL})
 })
