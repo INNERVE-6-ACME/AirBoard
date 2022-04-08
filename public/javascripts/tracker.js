@@ -79,7 +79,6 @@ function mouseDragged(res1,res2,res4){
         return Math.hypot(x1 - x0, y1 - y0);
     }
     var dist=distance(x0, y0, x1, y1)
-    //console.log("Dist : "+ dist.toString());
     if(type == "pencil" && dist<=50){
         let pmouseX=(1-res1.x)*1280,pmouseY=res1.y*720,mouseX=(1-res2.x)*1280,mouseY=res2.y*720
         strokeWeight(size)
@@ -89,16 +88,12 @@ function mouseDragged(res1,res2,res4){
           "c2": {x:mouseX, y:mouseY},
           "stroke-size": size
         }))
-        //line(pmouseX,pmouseY,mouseX,mouseY);
     }
 }
 
 ws.onmessage = (e) => {
   var x = e
   e=JSON.parse(e.data)
-  //console.log(typeof(e))
-  // console.log(e['c1'])
-  // console.log(e.c1.x)
   strokeWeight(e['stroke-size'])
   line(e['c1']['x'], e['c1']['y'], e['c2']['x'], e['c2']['y']);
 }
@@ -115,55 +110,3 @@ function(){
 
 // *************************************************************************** */
 
-
-// navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia ||
-//           navigator.mediaDevices.webkitGetUserMedia || navigator.mediaDevices.mozGetUserMedia ||
-//           navigator.mediaDevices.msGetUserMedia;
-
-
-// if (navigator.getUserMedia)
-// {
-// navigator.mediaDevices.getUserMedia({
-//     video:true,
-//     audio:true
-// }).then(stream=>{
-//     // addVideoStream(myVideo,stream)
-//     // peer.on("call",call=>{
-//     //     call.answer(stream)
-//     //     const video=document.createElement("video")
-//     //     call.on("stream",userVideoStream=>{
-//     //         addVideoStream(video,userVideoStream)
-//     //     })
-//     // })
-//     // socket.on('user-connected',(userId) => {
-//     //     alert("Incoming Call !")
-//     //     connectToNewUser(userId,stream)
-//     //     console.log("*****************************")
-//     // })
-// })
-// //}
-
-// peer.on("open",id=>{
-//     socket.emit("join-room",ROOM_ID,id) ;
-// })
-
-// function addVideoStream(video,stream){
-//     video.srcObject=stream,
-//     video.addEventListener("loadedmetadata",()=>{
-//         video.play()
-//     })
-//     videoGrid.append(video)
-// }
-
-// function connectToNewUser(userId,stream)
-// {
-//     const call=peer.call(userId,stream)
-//     const video=document.createElement('video')
-//     call.on("stream",userVideoStream=>{
-//         call.answer(stream)
-//         addVideoStream(video,userVideoStream)
-//     })
-//     call.on("close",()=>{
-//         video.remove()
-//     })
-// }

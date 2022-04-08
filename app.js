@@ -25,9 +25,12 @@ app.get("/login",(req, res) => {
   app.get("/",(req, res) => {
     res.render("home",{apiurl:process.env.API_URL})
   })
+  app.get("/chats/:team_id",(req, res) => {
+    res.render("chats",{ws_url:process.env.WS_URL, team_id:req.params.team_id})
+  })
 
 
-app.get("/:room",(req,res)=>{
+app.get("/room/:room",(req,res)=>{
     res.render("room",{roomId:req.params.room,title:"Airboard", ws_url:process.env.WS_URL+"/ws/board/1"})
 })
 
