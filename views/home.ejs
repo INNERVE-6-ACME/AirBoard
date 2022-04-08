@@ -142,30 +142,6 @@
             }
         </script>
 
-        <script>
-             var formEl = document.forms.signup_form;
-        formEl.onsubmit = (e) => {
-            e.preventDefault();
-            var formData = new FormData(formEl);
-            fetch(api_url, {
-                method: 'post',
-                body: formData
-            })
-                .then(res => {
-                    if (res.status === 201) {
-                        alert("Account Successfully created 🔥🔥🔥")
-                    }
-                    else{
-                        var data = res.json();
-                        data.then(a =>{
-                            alert(a.username)
-                        })
-                    }
-                })
-
-        }
-        </script>
-
 </body>
 
 </html>
