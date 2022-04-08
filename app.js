@@ -8,7 +8,7 @@ require('dotenv').config()
 app.set("view engine","ejs")
 app.use(express.static("public"))
 
-app.get("/",(req,res)=>{
+app.get("/video",(req,res)=>{
     res.redirect(`/${idgen()}`)
 })
 
@@ -38,8 +38,6 @@ io.on("connection",socket=>{
 })
 server.listen(process.env.port||3000)
 
-<<<<<<< HEAD
-=======
 app.use(express.static(__dirname + '/public'));
 app.get('/', (req, res)=>{
     res.render("team_page")
@@ -47,4 +45,3 @@ app.get('/', (req, res)=>{
 
 
   app.listen(3300)
->>>>>>> ab7a12fb302e88c126967234182c9536b651c570
