@@ -3,9 +3,8 @@ const socket=io("/")
 const videoGrid=document.getElementById("video-grid")
 //document.getElementsByClassName('input_video')[0];
 const peer=new Peer(undefined,{
-    host:"192.168.119.151",
-    port:"8080",
-    path:"/"
+    host:"/",
+    port:"3001",
 })
 
 const myVideo=document.createElement("video")
