@@ -36,6 +36,7 @@
         .h6 {
             font-family: "Roboto", sans-serif;
         }
+
         a {
             -webkit-transition: .3s all ease;
             -o-transition: .3s all ease;
@@ -492,10 +493,25 @@
                 .then(res => {
                     if (res.status === 201) {
                         alert("Account Successfully created 🔥🔥🔥")
+                        //window.location.href = window.location.origin
+                        fetch("<%= apiurl%>/api/login/",{
+                            method:'post',
+                            body:formData
+                        })
+                        .then(res => {
+                            res.json().then(data => {
+                                if(res.status == 200){
+                                    document.cookie = "authtoken="+data.token
+                                    window.location.href = window.location.origin
+                                }else{
+                                    alert("Error occured!");
+                                }
+                            })
+                        })
                     }
-                    else{
+                    else {
                         var data = res.json();
-                        data.then(a =>{
+                        data.then(a => {
                             alert(a.username)
                         })
                     }
