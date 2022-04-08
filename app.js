@@ -29,9 +29,12 @@ io.on("connection",socket=>{
         socket.join(roomId)
         socket.broadcast.to(roomId).emit("user-connected",userId)
     })
-    socket.on("render-img",(res1,res2,res4,roomId)=>{
-        socket.broadcast.to(roomId).emit("update-canvas",res1,res2,res4)
+    socket.on('connection-request',(roomId,userId)=>{
+        io.to(roomId).emit('new-user-connected',userId);
     })
+    // socket.on("render-img",(res1,res2,res4,roomId)=>{
+    //     socket.broadcast.to(roomId).emit("update-canvas",res1,res2,res4)
+    // })
 })
 server.listen(process.env.port||3000)
 

@@ -1,13 +1,13 @@
 //import{io} from "socket.io-client";
 const socket=io("/")
-const myVideo=document.getElementById("video-grid")
+const videoGrid=document.getElementById("video-grid")
 //document.getElementsByClassName('input_video')[0];
 const peer=new Peer(undefined,{
     host:"/",
     port:"3001"
 })
 
-// const myVideo=document.createElement("video")
+const myVideo=document.createElement("video")
 myVideo.muted=true
 
 // navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia ||
@@ -29,12 +29,14 @@ navigator.mediaDevices.getUserMedia({
             addVideoStream(video,userVideoStream)
         })
     })
-    socket.on('user-connected',(userId) => {
-        alert("Incoming Call !")
-        connectToNewUser(userId,stream)
-        console.log("*****************************")
+    socket.on('new-user-connected',userId =>{
+        if(userId!=peer.id){
+            console.log("New user: "+userId);
+            connectToNewUser(userId,stream);
+        }
     })
-})
+    socket.emit('connection-request',ROOM_ID,peer.id);
+});
 //}
 
 peer.on("open",id=>{

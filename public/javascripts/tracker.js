@@ -4,8 +4,6 @@ var prevThumb = {visiblity:undefined,x:0,y:0,z:0}
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
-// websocket connection code
-var ws = new WebSocket(ws_url)
 
 const camera = new Camera(videoElement, {
   onFrame: async () => {
@@ -82,28 +80,10 @@ function mouseDragged(res1,res2,res4){
     //console.log("Dist : "+ dist.toString());
     if(type == "pencil" && dist<=50){
        let pmouseX=(1-res1.x)*1280,pmouseY=res1.y*720,mouseX=(1-res2.x)*1280,mouseY=res2.y*720
-
-        ws.send(JSON.stringify({
-          "c1": {x:pmouseX, y:pmouseY},
-          "c2": {x:mouseX, y:mouseY},
-          "stroke-size": size
-        }))
-        
         strokeWeight(size)
         line(pmouseX, pmouseY, mouseX, mouseY);
         //line(pmouseX,pmouseY,mouseX,mouseY);
     }
-}
-
-
-ws.onmessage = (e) => {
-  var x = e
-  e=JSON.parse(e.data)
-  //console.log(typeof(e))
-  // console.log(e['c1'])
-  // console.log(e.c1.x)
-  strokeWeight(e['stroke-size'])
-  line(e['c1']['x'], e['c1']['y'], e['c2']['x'], e['c2']['y']);
 }
 
 _("#reset-canvas").addEventListener("click",
