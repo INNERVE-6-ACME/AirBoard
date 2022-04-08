@@ -11,7 +11,7 @@ urlpatterns = [
     path('signup/', views.NewUser.as_view()),
     path('addstudent', views.AddRemoveStudent.as_view()),
     path('session/<int:session_id>', views.SessionAPI.as_view(), name='session'),
-    path('addsession', views.CreateDeleteSession.as_view()),
+    path('addsession/', views.CreateDeleteSession.as_view()),
     path('savesession/', views.SaveSession.as_view()),
     path('login/', obtain_auth_token, name='login'),
 ]

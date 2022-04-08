@@ -6,7 +6,7 @@ const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
 //require("dotenv").config()
 
-var ws = new WebSocket(ws_url+"/ws/board/1") // TODO : pass session_id as param
+var ws = new WebSocket(ws_url+"/ws/board/" + roomId)
 const camera = new Camera(videoElement, {
   onFrame: async () => {
     await hands.send({image: videoElement});
@@ -17,9 +17,21 @@ const camera = new Camera(videoElement, {
 
 camera.start();
 
-function fingersUp(res4,res2,middle,ring,little)
+function fingersUp(res4,total)
 {
-
+  var fingers=[]
+  if(res4.x>total[0][3])
+   fingers.push(1)
+  else
+   fingers.push(0)
+  var fArray=[8,12,16,20]
+  fArray.forEach((item) => {
+    if(total[0][item].y>total[0][item-2].y)
+     fingers.push(0)
+    else
+     fingers.push(1)
+  })
+  return fingers
 }
 
 function onResults(results) {
@@ -33,11 +45,15 @@ function onResults(results) {
     //console.log(results.multiHandLandmarks)
     var res2 = results.multiHandLandmarks[0][8]
     var res4 = results.multiHandLandmarks[0][4]
-    var middle = results.multiHandLandmarks[0][12]
-    var ring= results.multiHandLandmarks[0][16]
-    var little =results.multiHandLandmarks[0][20]
-    var pos = fingersUp(ras4,res2,middle,ring,little)
-    //console.log(res1,res2,res3,res4)
+    //var thumb3= results.multiHandLandmarks[0][3]
+    //var middle = results.multiHandLandmarks[0][12]
+    //var ring= results.multiHandLandmarks[0][16]
+    //var little =results.multiHandLandmarks[0][20]
+    var pos = fingersUp(res4,results.multiHandLandmarks)
+    canvasCtx.beginPath();
+    console.log(res2.x, res2.y);
+    canvasCtx.arc(res2.x * 1280, res2.y * 720, 10, 0, 2 * Math.PI);
+    canvasCtx.stroke();
     mouseDragged(res1,res2,res4)
     // socket2.emit()
      prevIndex=res2 

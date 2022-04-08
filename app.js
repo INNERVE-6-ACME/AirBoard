@@ -12,13 +12,11 @@ app.get("/video",(req,res)=>{
     res.redirect(`/${idgen()}`)
 })
 
-// app.get("/track",(req,res)=>{
-//     res.render("track")
-// })
 
-app.get("/paint",(req,res)=>{
-    res.render("board",{title:"Airboard",ws_url:process.env.WS_URL})
-})
+app.get("/sessions/:team_id",(req, res) => {
+    res.render("sessions", {apiurl:process.env.API_URL, team_id:req.params.team_id});
+  })
+
 
 app.get("/login",(req, res) => {
     res.render("login",{apiurl:process.env.API_URL})
@@ -33,6 +31,10 @@ app.get("/:room",(req,res)=>{
     res.render("room",{roomId:req.params.room,title:"Airboard"})
 })
 
+app.get("/session/:session_id",(req,res) => {
+    res.render("board", {roomId:req.params.session_id, title:"AirBoard", apiurl:process.env.API_URL, ws_url:process.env.WS_URL})
+  })
+
 io.on("connection",socket=>{
     socket.on("join-room",(roomId,userId)=>{
         socket.join(roomId)
@@ -41,11 +43,5 @@ io.on("connection",socket=>{
     socket.on('connection-request',(roomId,userId)=>{
         io.to(roomId).emit('new-user-connected',userId);
     })
-    // socket.on("render-img",(res1,res2,res4,roomId)=>{
-    //     socket.broadcast.to(roomId).emit("update-canvas",res1,res2,res4)
-    // })
 })
-
 server.listen(process.env.port||3000)
-
-
