@@ -20,7 +20,12 @@
 
         #mybutton {
             position: fixed;
-            bottom: 6vh;
+            bottom: 8vh;
+            left: 87vw;
+        }
+        #mybutton2 {
+            position: fixed;
+            bottom: 2vh;
             left: 87vw;
         }
     </style>
@@ -43,11 +48,16 @@
     </div>
     
     <!-- Button trigger modal -->
+    <div>
     <button type="button" id="mybutton" class="btn btn-outline-secondary" data-toggle="modal"
         data-target="#create-teams">
         Create Session
     </button>
-
+    <button type="button" id="mybutton2" class="btn btn-outline-secondary" data-toggle="modal"
+        data-target="#add-students">
+        Add Student
+    </button>
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="create-teams" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -81,6 +91,31 @@
             </div>
         </div>
     </div>
+    <!-- <Modal 2> -->
+        <div class="modal fade" id="add-students" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Students</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="create_form">
+                            <div class="form-group" id="">
+                                <label for="session-name" class="col-form-label">User Name:</label>
+                                <input type="text" class="form-control" id="user_name">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="add_student_btn" class="btn btn-primary">Add Student</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     <script>
         var api_url = "<%= apiurl%>/api/teams/<%= team_id%>"
         fetch(api_url, {
@@ -151,11 +186,37 @@
                         window.location.reload()
                     }
                     else{
-                        alert("Something went wrong with the session creation")
+                        alert("Something went wrong with the session creation !")
                     }
                 })
         }
     </script>
+
+<script>
+    var api_url = "<%= apiurl%>/api/addstudent/"
+    document.getElementById("add_student_btn").onclick = () => {
+        fetch(api_url, {
+            method: 'post',
+            headers: {
+                "Authorization": `Token ${document.cookie.valueOf('authtoken').split("authtoken=")[1].split(";")[0]}`,
+                'Content-Type':"application/json"
+            },
+            body: JSON.stringify({
+                team_id:"<%= team_id %>",
+                student_username: document.getElementById("user_name").value
+            })
+        })
+            .then(res => {
+                if (res.status === 200 || res.status === 201) {
+                    alert("Student Successfully added 🔥🔥🔥")
+                    window.location.reload()
+                }
+                else{
+                    alert("Something went wrong with the student addition to team !")
+                }
+            })
+    }
+</script>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     
