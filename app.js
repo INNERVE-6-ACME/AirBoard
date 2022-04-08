@@ -38,7 +38,7 @@ app.get("/room/:room",(req,res)=>{
 })
 
 app.get("/session/:session_id",(req,res) => {
-    res.render("board", {roomId:req.params.session_id, title:"AirBoard", apiurl:process.env.API_URL, ws_url:process.env.WS_URL})
+    res.render("board", {roomId:req.params.session_id, title:"AirBoard", api_url:process.env.API_URL, ws_url:process.env.WS_URL})
   })
 
 io.on("connection",socket=>{

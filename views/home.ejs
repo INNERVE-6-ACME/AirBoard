@@ -91,7 +91,6 @@
             fetch(api_url, {
                 method: 'get',
                 headers: { "Authorization": `Token ${document.cookie.valueOf('authtoken').split("authtoken=")[1].split(";")[0]}` }
-
             })
                 .then(res => res.json())
                 .then(data => {
