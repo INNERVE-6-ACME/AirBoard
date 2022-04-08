@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sign In</title>
+</head>
+
+<body>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <!-- <div class="col-md-6">
+                    <img src="images/signup_img.svg" alt="Image" class="img-fluid">
+                </div> -->
+                <div class="col-md-6 contents">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="mb-4">
+                                <h3>User Sign In</h3>
+                            </div>
+                            <form id="login_form" method="post">
+
+                                
+                                <div>
+                                    <div class="form-group last mb-4">
+                                        <input type="text" class="form-control" placeholder="Username" name="username">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="form-group last mb-4">
+                                        <input type="password" class="form-control" placeholder="Password" name="password">
+                                    </div>
+                                </div>
+                                
+                                <span style="color: red;"> </span>
+                                <input type="submit" name="signup" id="signup" value="Log In" class="btn btn-block btn-primary">
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var api_url = "<%= apiurl%>/api/login/"
+        var formEl=document.forms.login_form;
+        formEl.onsubmit = (e) => {
+            e.preventDefault();
+            var formData=new FormData(formEl);
+            fetch(api_url,{
+                method:'post',
+                body:formData
+            })
+            .then(res => {
+                res.json().then(data => {
+                    if(res.status == 200){
+                        alert("Success!");
+                        document.cookie = "authtoken="+data.token
+                        window.location.href = window.location.origin
+                    }else{
+                        alert("Error occured!");
+                    }
+                })
+            })
+
+        }
+            </script>
+            </body>
+            </html>
