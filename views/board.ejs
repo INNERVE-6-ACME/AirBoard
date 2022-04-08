@@ -13,13 +13,6 @@
     <h1><%= title %></h1>
     <div class="app">
         <div class="controls">
-            <!-- <div class="title"> Sketch </div>
-            <input class="type">
-                <input type="radio" name="pen-type" id="pen-brush">
-                <label for="pen-brush">
-                    <i class="fa fa-pen-brush"></i>
-                </label>
-            </div> --> 
 
             <div class="size">
                 <label for="pen-size">Size</label>
@@ -46,6 +39,9 @@
     </div>
   </body>
   <!-- <script defer src="canvas.js"></script> -->
-  <script>var ws_url = "<%= ws_url %>"</script>
-  <script defer src="./javascripts/tracker.js"></script>
+  <script>
+      var ws_url = "<%= ws_url %>"
+      var roomId = "<%= roomId %> "
+    </script>
+  <script defer src="/javascripts/tracker.js"></script>
 </html>

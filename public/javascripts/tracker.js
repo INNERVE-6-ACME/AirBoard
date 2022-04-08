@@ -6,7 +6,7 @@ const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
 //require("dotenv").config()
 
-var ws = new WebSocket(ws_url+"/ws/board/1")
+var ws = new WebSocket(ws_url+"/ws/board/" + roomId)
 const camera = new Camera(videoElement, {
   onFrame: async () => {
     await hands.send({image: videoElement});
