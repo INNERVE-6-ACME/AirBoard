@@ -143,31 +143,27 @@
         </script>
 
         <script>
-            document.getElementById("create_team").onclick = () => {
-                var team_name = prompt("Enter team name")
-                var api_url = "<%= apiurl %>/api/teams/"
-                fetch(api_url, {
-                    method: "POST",
-                    headers: {
-                        "Authorization": `Token ${document.cookie.valueOf('authtoken').split("authtoken=")[1].split(";")[0]}`,
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        team_name: team_name
-                    })
+             var formEl = document.forms.signup_form;
+        formEl.onsubmit = (e) => {
+            e.preventDefault();
+            var formData = new FormData(formEl);
+            fetch(api_url, {
+                method: 'post',
+                body: formData
+            })
+                .then(res => {
+                    if (res.status === 201) {
+                        alert("Account Successfully created 🔥🔥🔥")
+                    }
+                    else{
+                        var data = res.json();
+                        data.then(a =>{
+                            alert(a.username)
+                        })
+                    }
                 })
-                    .then(response => {
-                        response.json()
-                            .then(data => {
-                                if (response.status === 201 || response.status === 200) {
-                                    window.location.reload()
-                                } else {
-                                    alert("You can't create a team")
-                                }
-                            })
-                    })
-                    .then(data => console.log(data))
-            }
+
+        }
         </script>
 
 </body>

@@ -64,6 +64,8 @@ class ChatConsumer(SyncConsumer):
         chat.save()
         data = json.loads(event['text'])
         data['user'] = user.username
+        data['time'] = chat.created_at.strftime("%H:%M:%S")
+        data['date'] = chat.created_at.strftime("%d/%m/%Y")
         del data['token']
         async_to_sync(self.channel_layer.group_send)(self.group_name, {
             'type': 'chat.message',
@@ -73,11 +75,16 @@ class ChatConsumer(SyncConsumer):
 
 
     def chat_message(self, event):
-        if self.channel_name != event['sender_channel_name']:
-            self.send({
-                "type": "websocket.send",
-                'text': event['message']
-            })
+        event['message'] = json.loads(event['message'])
+        if self.channel_name == event['sender_channel_name']:
+            event['message']['sender'] = True
+        else:
+            event['message']['sender'] = False
+        event['message'] = json.dumps(event['message'])
+        self.send({
+            "type": "websocket.send",
+            'text': event['message']
+        })
 
 
     def websocket_disconnect(self, event):

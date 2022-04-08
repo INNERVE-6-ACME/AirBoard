@@ -1,14 +1,33 @@
+
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airboard</title>
+    <script>
+        const ROOM_ID ="<%= roomId %>"
+    </script>
     <link rel='stylesheet' href="/stylesheets/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
-    <script src="https://docs.opencv.org/3.4.0/opencv.js" defer></script>
+    <style>
+        #video-grid{
+            display: grid;
+            grid-template-columns: repeat(auto-fill,300px);
+            grid-template-rows: 300px;
+        }
+        video{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+    </style>
+</head>
   </head>
   <body>
     <h1><%= title %></h1>
@@ -27,7 +46,8 @@
 
             <div class="actions">
                 <button id="reset-canvas">Reset</button>
-                <button id="save-canvas">Save</button>
+                <button>Save to Cloud</button>
+                <button id="save-canvas">Download</button>
             </div>
 
         </div>
@@ -38,11 +58,14 @@
         <video class="input_video" width="20%" height="20%" style="display:none"></video>
         <canvas class="output_canvas" width="1280px" height="720px"></canvas>
     </div>
-  </body>
-  <!-- <script defer src="canvas.js"></script> -->
-  <script>
-      var ws_url = "<%= ws_url %>"
-      var roomId = "<%= roomId %> "
-    </script>
-  <script defer src="/javascripts/tracker.js"></script>
+    <div id="video-grid">
+    </div>
+</body>
+<!-- <script src="client.js" defer></script> -->
+<script>
+    var ws_url="<%= ws_url %>"
+    var roomId="<%= roomId %>"
+</script>
+<script defer src="/javascripts/tracker.js"></script>
+
 </html>

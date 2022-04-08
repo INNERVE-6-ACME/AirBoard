@@ -126,7 +126,6 @@ function mouseDragged(res1,res2,res4){
         return Math.hypot(x1 - x0, y1 - y0);
     }
     var dist=distance(x0, y0, x1, y1)
-    //console.log("Dist : "+ dist.toString());
     if(type == "pencil" && dist<=50){
         let pmouseX=(1-res1.x)*1280,pmouseY=res1.y*720,mouseX=(1-res2.x)*1280,mouseY=res2.y*720
         strokeWeight(size)
@@ -137,7 +136,6 @@ function mouseDragged(res1,res2,res4){
           "c2": {x:mouseX, y:mouseY},
           "stroke-size": size
         }))
-        //line(pmouseX,pmouseY,mouseX,mouseY);
     }
 }
 
@@ -170,4 +168,5 @@ function(){
     saveCanvas(canvas,"sketch","png");
 });
 
-// *************************************************************************** */
+
+
