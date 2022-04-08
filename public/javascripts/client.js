@@ -13,8 +13,6 @@ myVideo.muted=true
 // navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia ||
 //           navigator.mediaDevices.webkitGetUserMedia || navigator.mediaDevices.mozGetUserMedia ||
 //           navigator.mediaDevices.msGetUserMedia;
-
-
 // if (navigator.getUserMedia)
 // {
 navigator.mediaDevices.getUserMedia({

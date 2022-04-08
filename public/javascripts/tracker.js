@@ -6,7 +6,7 @@ const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
 //require("dotenv").config()
 
-var ws = new WebSocket(ws_url+"/ws/board/1")
+var ws = new WebSocket(ws_url+"/ws/board/1") // TODO : pass session_id as param
 const camera = new Camera(videoElement, {
   onFrame: async () => {
     await hands.send({image: videoElement});
@@ -17,6 +17,10 @@ const camera = new Camera(videoElement, {
 
 camera.start();
 
+function fingersUp(res4,res2,middle,ring,little)
+{
+
+}
 
 function onResults(results) {
   canvasCtx.save();
@@ -29,6 +33,10 @@ function onResults(results) {
     //console.log(results.multiHandLandmarks)
     var res2 = results.multiHandLandmarks[0][8]
     var res4 = results.multiHandLandmarks[0][4]
+    var middle = results.multiHandLandmarks[0][12]
+    var ring= results.multiHandLandmarks[0][16]
+    var little =results.multiHandLandmarks[0][20]
+    var pos = fingersUp(ras4,res2,middle,ring,little)
     //console.log(res1,res2,res3,res4)
     mouseDragged(res1,res2,res4)
     // socket2.emit()

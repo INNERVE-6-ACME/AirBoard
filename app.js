@@ -17,7 +17,7 @@ app.get("/video",(req,res)=>{
 // })
 
 app.get("/paint",(req,res)=>{
-    res.render("paint",{title:"Airboard",ws_url:process.env.WS_URL})
+    res.render("board",{title:"Airboard",ws_url:process.env.WS_URL})
 })
 
 app.get("/login",(req, res) => {
@@ -30,7 +30,7 @@ app.get("/login",(req, res) => {
 
 
 app.get("/:room",(req,res)=>{
-    res.render("room",{roomId:req.params.room,title:"Airboard", ws_url:process.env.WS_URL+"/ws/board/1"})
+    res.render("room",{roomId:req.params.room,title:"Airboard"})
 })
 
 io.on("connection",socket=>{
@@ -45,14 +45,7 @@ io.on("connection",socket=>{
     //     socket.broadcast.to(roomId).emit("update-canvas",res1,res2,res4)
     // })
 })
+
 server.listen(process.env.port||3000)
 
-app.use(express.static(__dirname + '/public'));
-// app.get('/', (req, res)=>{
-//     res.render("team_page")
-// })
 
-
-
-
-  app.listen(3300)
