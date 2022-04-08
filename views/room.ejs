@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airboard</title>
+    <script>
+        const ROOM_ID ="<%= roomId %>"
+    </script>
+    <script defer src="./javascripts/peerjs.min.js"></script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <link rel='stylesheet' href="/stylesheets/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <style>
+        #video-grid{
+            display: grid;
+            grid-template-columns: repeat(auto-fill,300px);
+            grid-template-rows: 300px;
+        }
+        video{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+    </style>
+</head>
+<body>
+    <div id="video-grid">
+    </div>
+</body>
+<script src="./javascripts/client.js" defer></script>
+<!-- <script>var ws_url="<%= ws_url %>"</script> -->
+<!-- <script defer src="tracker.js"></script> -->
+</html>
