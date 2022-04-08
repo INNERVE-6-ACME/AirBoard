@@ -68,11 +68,11 @@ function onResults(results) {
         "c1": {x:(1-res1.x), y:res1.y},
       }))
 
-      canvasCtx2.beginPath();
-      //console.log(res2.x, res2.y);
-      canvasCtx2.arc((1 - res2.x) * 1280, res2.y * 720, 10, 0, 2 * Math.PI);
-      strokeWeight(trackerSize)
-      canvasCtx2.stroke()
+      // canvasCtx2.beginPath();
+      // //console.log(res2.x, res2.y);
+      // canvasCtx2.arc((1 - res2.x) * 1280, res2.y * 720, 10, 0, 2 * Math.PI);
+      // strokeWeight(trackerSize)
+      // canvasCtx2.stroke()
     }
     else{
     mouseDragged(res1,res2,res4)
@@ -170,3 +170,21 @@ function(){
 
 
 
+_("#save_canvas_cloud").addEventListener("click", () => {
+  var url = api_url + "/api/savesession/";
+  var data = {
+    "session_id": roomId,
+    "board": canvas.toDataURL("image/png").split(";base64,")[1]
+  }
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Token " + token
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+
+  })
+})
