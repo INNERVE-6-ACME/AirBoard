@@ -135,7 +135,7 @@
         </script>
 
         <script>
-            if(document.cookie.valueOf('authtoken') === ''){
+            if(!document.cookie.valueOf('authtoken').includes('authtoken')){
                 alert("Login Required");
                 window.location.href = "/login"
             }
