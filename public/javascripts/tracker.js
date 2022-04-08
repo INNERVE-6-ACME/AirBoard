@@ -5,6 +5,7 @@ let trackerSize=1
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
+var canvasCtx2=null
 //let canvasCtx2=document.getElementById("#canvas-wrapper").getContext("2d");
 //require("dotenv").config()
 var ws = new WebSocket(ws_url+"/ws/board/" + roomId)
@@ -51,17 +52,27 @@ function onResults(results) {
     //var ring= results.multiHandLandmarks[0][16]
     //var little =results.multiHandLandmarks[0][20]
     var pos = fingersUp(res4,results.multiHandLandmarks)
-    var canvasCtx2=null
     if(document.getElementById("defaultCanvas0") != null)
      canvasCtx2=document.getElementById("defaultCanvas0").getContext("2d");
     if(pos[1]===1 && pos[2]===1 && canvasCtx2!=null)
     {
+      // canvasCtx2.beginPath();
+      // //console.log(res2.x, res2.y);
+      // canvasCtx2.arc((1 - res1.x) * 1280, res1.y * 720, 10, 0, 2 * Math.PI);
+      // strokeWeight(trackerSize)
+
+      canvasCtx2.fillStyle = 'white';
+      canvasCtx2.fillRect((1-res1.x)*1280 - 20, res1.y*720 - 20, 40, 40);
+      ws.send(JSON.stringify({
+        "type": "erase",
+        "c1": {x:(1-res1.x), y:res1.y},
+      }))
+
       canvasCtx2.beginPath();
       //console.log(res2.x, res2.y);
       canvasCtx2.arc((1 - res2.x) * 1280, res2.y * 720, 10, 0, 2 * Math.PI);
       strokeWeight(trackerSize)
       canvasCtx2.stroke()
-      canvasCtx2.restore()
     }
     else{
     mouseDragged(res1,res2,res4)
@@ -104,6 +115,7 @@ function mouseDragged(res1,res2,res4){
     let type= "pencil";
     let size = parseInt(_("#pen-size").value);
     let color= _("#pen-color").value;
+    //console.log(typeof(color))
     fill(color);
     stroke(color);
     var x0=res4.x*1280;
@@ -119,6 +131,7 @@ function mouseDragged(res1,res2,res4){
         strokeWeight(size)
         line(pmouseX, pmouseY, mouseX, mouseY)
         ws.send(JSON.stringify({
+          "type":"pen",
           "c1": {x:pmouseX, y:pmouseY},
           "c2": {x:mouseX, y:mouseY},
           "stroke-size": size
@@ -129,8 +142,20 @@ function mouseDragged(res1,res2,res4){
 ws.onmessage = (e) => {
   var x = e
   e=JSON.parse(e.data)
+  //console.log(typeof(e))
+  // console.log(e['c1'])
+  // console.log(e.c1.x)
+  if(e["type"]==="pen")
+  {
   strokeWeight(e['stroke-size'])
   line(e['c1']['x'], e['c1']['y'], e['c2']['x'], e['c2']['y']);
+  }
+  else{
+    if(document.getElementById("defaultCanvas0") != null)
+     canvasCtx2=document.getElementById("defaultCanvas0").getContext("2d");
+    canvasCtx2.fillStyle = 'white';
+    canvasCtx2.fillRect((1-e["c1"]["x"])*1280 - 20, e["c1"]["y"]*720 - 20, 40, 40);
+  }
 }
 
 _("#reset-canvas").addEventListener("click",
@@ -143,9 +168,5 @@ function(){
     saveCanvas(canvas,"sketch","png");
 });
 
-<<<<<<< HEAD
-// *************************************************************************** */
 
-=======
-// *************************************************************************** */
->>>>>>> 3adefa98e6c797eea8a4da162e783d89092d5f65
+
