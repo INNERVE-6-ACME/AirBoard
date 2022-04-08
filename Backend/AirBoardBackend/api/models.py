@@ -21,7 +21,7 @@ class Team(models.Model):
 class Session(models.Model):
     session_name = models.CharField(max_length=100)
     team = models.ForeignKey('Team', on_delete=models.CASCADE, null=False)
-    board = models.FileField(upload_to="images", max_length=100)
+    board = models.FileField(upload_to="images", max_length=100, null=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
