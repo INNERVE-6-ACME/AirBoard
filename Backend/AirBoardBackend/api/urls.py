@@ -4,9 +4,11 @@ from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
+router.register("teams", views.TeamModelViewSet, basename="teams")
 
 urlpatterns = [
     path('', include(router.urls)),
     path('signup/', views.NewUser.as_view()),
+    path('addsession', views.CreateDeleteSession.as_view()),
     path('login/', obtain_auth_token, name='login')
 ]
