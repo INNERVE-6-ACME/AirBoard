@@ -17,6 +17,10 @@
         margin-top: 1%;
         margin-right: 3%;
     }
+
+    .logout-button {
+        display: none;
+    }
 </style>
 
 <body>
@@ -63,10 +67,10 @@
                     <li>
                         <a href="#"><span class="fa fa-paper-plane mr-3"></span> Chats</a>
                     </li>
+                    <li>
+                        <a href="#" id="link1"><span class="fa fa-sign-out mr-3"></span>Logout</a>
+                    </li>
                 </ul>
-
-
-
             </div>
         </nav>
 
@@ -96,8 +100,8 @@
                     console.log(teams);
                     for (var i = 0; i < teams.length; i++) {
                         var start = teams[i].created_at.split('T')[0].split("-")
-                        start = new Date(start[0], start[1]-1, start[2])
-                        var month = start.toLocaleString("en-us",{month:'long'});
+                        start = new Date(start[0], start[1] - 1, start[2])
+                        var month = start.toLocaleString("en-us", { month: 'long' });
                         var date = start.getDate()
                         var el = `<div class="col-lg-6">
                         <div class="card card-margin">
@@ -116,11 +120,11 @@
                                             <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span>
                                         </div>
                                     </div>
-                                    <ol class="widget-49-meeting-points">
-                                        <li class="widget-49-meeting-item"><span>Scope is revised and updated</span></li>
+                                    <ul class="widget-49-meeting-points">
+                                        <li class="widget-49-meeting-item"><span>Teacher : ${teams[i].teacher.username}</span></li>
                                         <li class="widget-49-meeting-item"><span>Time-line has been changed</span></li>
                                         <li class="widget-49-meeting-item"><span>Received approval to start wire-frame</span></li>
-                                    </ol>
+                                    </ul>
                                     <div class="widget-49-meeting-action">
                                         <a href="/sessions/${teams[i].id}" class="btn btn-sm btn-flash-border-success">View Sessions</a>
                                     </div>
@@ -134,9 +138,18 @@
                 })
 
         </script>
+        <script type="text/javascript">
+            var link1 = document.getElementById("link1");
+            
+            link1.onclick = () => {
+                document.cookie = document.cookie + ";max-age=0"
+                alert("Logged out successfully ✅✅");
+                window.location.href = "/login"
+            }
+        </script>
 
         <script>
-            if(document.cookie.valueOf('authtoken') === ''){
+            if (document.cookie.valueOf('authtoken') === '') {
                 alert("Login Required");
                 window.location.href = "/login"
             }
