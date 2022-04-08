@@ -17,7 +17,7 @@ app.get("/video",(req,res)=>{
 // })
 
 app.get("/paint",(req,res)=>{
-    res.render("paint",{title:"Airboard"})
+    res.render("paint",{title:"Airboard",ws_url:process.env.WS_URL})
 })
 
 app.get("/:room",(req,res)=>{
