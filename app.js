@@ -20,6 +20,15 @@ app.get("/paint",(req,res)=>{
     res.render("paint",{title:"Airboard",ws_url:process.env.WS_URL})
 })
 
+app.get("/login",(req, res) => {
+    res.render("login",{apiurl:process.env.API_URL})
+  })
+
+  app.get("/",(req, res) => {
+    res.render("home",{apiurl:process.env.API_URL})
+  })
+
+
 app.get("/:room",(req,res)=>{
     res.render("room",{roomId:req.params.room,title:"Airboard", ws_url:process.env.WS_URL+"/ws/board/1"})
 })
@@ -39,9 +48,11 @@ io.on("connection",socket=>{
 server.listen(process.env.port||3000)
 
 app.use(express.static(__dirname + '/public'));
-app.get('/', (req, res)=>{
-    res.render("team_page")
-})
+// app.get('/', (req, res)=>{
+//     res.render("team_page")
+// })
+
+
 
 
   app.listen(3300)

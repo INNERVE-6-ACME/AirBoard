@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/teams.css">
+    <link rel="stylesheet" href="stylesheets/home.css">
+</head>
+<style>
+    
+  #mybutton {
+      position: relative;
+      margin-top:1%;
+    margin-right:3%;
+  }
+</style>
+<body>
+
+</body>
+
+</html>
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Sidebar 03</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="custom-menu">
+            </div>
+            <div class="p-4">
+                <h1><a href="index.html" class="logo">Airboard</a></h1>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-user mr-3"></span> Members</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-briefcase mr-3"></span> Meetings</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-sticky-note mr-3"></span> Assignments</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-paper-plane mr-3"></span> Chats</a>
+                    </li>
+                </ul>
+
+
+
+            </div>
+        </nav>
+
+        <!-- Page Content  -->
+        <div class="p-4 p-md-5 pt-5">
+            <div class="container">
+                <div class="row" id="content">
+                </div>
+            </div>
+        </div>
+        
+        <div id="mybutton">
+            <button id="create_team" class="btn btn-outline-secondary">Create Team</button>
+        </div>
+        <script>
+            var api_url = "<%= apiurl%>/api/teams/"
+            var teams = {};
+            fetch(api_url, {
+                method: 'get',
+                headers: { "Authorization": `Token ${document.cookie.valueOf('authtoken').split("authtoken=")[1].split(";")[0]}` }
+
+            })
+                .then(res => res.json())
+                .then(data => {
+                    teams = data.teams
+                    var par = document.getElementById("content")
+                    console.log(teams);
+                    for (var i = 0; i < teams.length; i++) {
+                        var el = `<div class="col-lg-6">
+                        <div class="card card-margin">
+                            <div class="card-header no-border">
+                                <h5 class="card-title">${teams[i].team_name}</h5>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="widget-49">
+                                    <div class="widget-49-title-wrapper">
+                                        <div class="widget-49-date-success">
+                                            <span class="widget-49-date-day">22</span>
+                                            <span class="widget-49-date-month">apr</span>
+                                        </div>
+                                        <div class="widget-49-meeting-info">
+                                            <span class="widget-49-pro-title">PRO-027865 Opera module</span>
+                                            <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span>
+                                        </div>
+                                    </div>
+                                    <ol class="widget-49-meeting-points">
+                                        <li class="widget-49-meeting-item"><span>Scope is revised and updated</span></li>
+                                        <li class="widget-49-meeting-item"><span>Time-line has been changed</span></li>
+                                        <li class="widget-49-meeting-item"><span>Received approval to start wire-frame</span></li>
+                                    </ol>
+                                    <div class="widget-49-meeting-action">
+                                        <a href="/teams_pages/${teams[i].id}" class="btn btn-sm btn-flash-border-success">View All</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+
+                        par.innerHTML += el
+                    }
+                })
+
+        </script>
+
+        <script>
+            document.getElementById("create_team").onclick = () => {
+                var team_name = prompt("Enter team name")
+                var api_url = "<%= apiurl %>/api/teams/"
+                fetch(api_url,{
+                    method: "POST",
+                    headers: { 
+                        "Authorization": `Token ${document.cookie.valueOf('authtoken').split("authtoken=")[1].split(";")[0]}` ,
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        team_name: team_name
+                    })
+                })
+                .then(response => {
+                    response.json()
+                    .then(data => {
+                        if (response.status === 201 || response.status === 200) {
+                            window.location.reload()
+                        }else{
+                            alert("You can't create a team")
+                        }
+                    })
+                })
+                .then(data => console.log(data))
+            }
+        </script>
+
+</body>
+
+</html>

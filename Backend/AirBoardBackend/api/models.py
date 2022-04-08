@@ -28,3 +28,13 @@ class Session(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
+
+# TABLE FOR CHATS IN ALL TEAMS
+class Chat(models.Model):
+    team = models.ForeignKey('Team', on_delete=models.CASCADE, null=False)
+    user = models.ForeignKey("User", on_delete=models.CASCADE, null=False)
+    message = models.CharField(max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return ", ".join([str(self.team.id), self.user.username, self.message])
