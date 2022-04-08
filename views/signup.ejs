@@ -4,21 +4,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossOrigin="anonymous" />
-    <title>Sign In</title>
+    <title>Sign Up</title>
     <style>
         body {
             font-family: "Roboto", sans-serif;
             background-color: #f8fafb;
         }
+
         p {
             color: #b3b3b3;
             font-weight: 300;
         }
+
         h1,
         h2,
         h3,
@@ -38,30 +41,38 @@
             -o-transition: .3s all ease;
             transition: .3s all ease;
         }
+
         a:hover {
             text-decoration: none !important;
         }
+
         .content {
             padding: 7rem 0;
         }
+
         h2 {
             font-size: 20px;
         }
+
         @media (max-width: 991.98px) {
             .content .bg {
                 height: 500px;
             }
         }
+
         .content .contents,
         .content .bg {
             width: 50%;
         }
+
         @media (max-width: 1199.98px) {
+
             .content .contents,
             .content .bg {
                 width: 100%;
             }
         }
+
         .content .contents .form-group,
         .content .bg .form-group {
             overflow: hidden;
@@ -72,6 +83,7 @@
             background: #edf2f5;
             border-bottom: 1px solid #e6edf1;
         }
+
         .content .contents .form-group label,
         .content .bg .form-group label {
             position: absolute;
@@ -83,20 +95,24 @@
             -o-transition: .3s all ease;
             transition: .3s all ease;
         }
+
         .content .contents .form-group input,
         .content .bg .form-group input {
             background: transparent;
         }
+
         .content .contents .form-group.first,
         .content .bg .form-group.first {
             border-top-left-radius: 7px;
             border-top-right-radius: 7px;
         }
+
         .content .contents .form-group.last,
         .content .bg .form-group.last {
             border-bottom-left-radius: 7px;
             border-bottom-right-radius: 7px;
         }
+
         .content .contents .form-group label,
         .content .bg .form-group label {
             font-size: 12px;
@@ -104,14 +120,17 @@
             margin-bottom: 0;
             color: #b3b3b3;
         }
+
         .content .contents .form-group.focus,
         .content .bg .form-group.focus {
             background: #fff;
         }
+
         .content .contents .form-group.field--not-empty label,
         .content .bg .form-group.field--not-empty label {
             margin-top: -20px;
         }
+
         .content .contents .form-control,
         .content .bg .form-control {
             border: none;
@@ -119,6 +138,7 @@
             font-size: 20px;
             border-radius: 0;
         }
+
         .content .contents .form-control:active,
         .content .contents .form-control:focus,
         .content .bg .form-control:active,
@@ -127,83 +147,104 @@
             -webkit-box-shadow: none;
             box-shadow: none;
         }
+
         .content .bg {
             background-size: cover;
             background-position: center;
         }
+
         .content a {
             color: #888;
             text-decoration: underline;
         }
+
         .content .btn {
             height: 54px;
             padding-left: 30px;
             padding-right: 30px;
         }
+
         .content .forgot-pass {
             position: relative;
             top: 2px;
             font-size: 14px;
         }
+
         .social-login {
             display: flex;
             justify-content: center;
             align-items: center;
             margin-top: 4%;
         }
+
         .socials {
             display: flex;
         }
+
         .social-label {
             display: inline-block;
             font-weight: bold;
             /* margin-right: 3%; */
         }
+
         list-type-ulli,
         .socials {
             list-style-type: none;
             margin: 0;
             padding: 0;
         }
+
         .socials li {
             padding: 5px;
         }
+
         .socials li:last-child {
             margin-right: 0px;
         }
+
         .socials li a {
             text-decoration: none;
         }
+
         .socials li a i {
             transform: translateZ(0);
             transition-duration: 0.3s;
             transition-property: transform;
             transition-timing-function: ease-out;
         }
+
         .socials li:hover a i {
             transform: scale(1.3) translateZ(0);
         }
+
         .social-login a:hover {
             color: #fff;
         }
+
         .social-login a.facebook {
             background: #3b5998;
         }
+
         .social-login a.facebook:hover {
             background: #344e86;
         }
+
         .social-login a.twitter {
             background: #1da1f2;
         }
+
         .social-login a.twitter:hover {
             background: #0d95e8;
         }
+
         .social-login a.google:hover {
             background: #e82e1e;
         }
+
         .disable {
-  user-select: none;
-}
+            user-select: none;
+        }
+
         .control {
             display: block;
             position: relative;
@@ -212,16 +253,19 @@
             cursor: pointer;
             font-size: 14px;
         }
+
         .control .caption {
             position: relative;
             top: .2rem;
             color: #888;
         }
+
         .control input {
             position: absolute;
             z-index: -1;
             opacity: 0;
         }
+
         .control__indicator {
             position: absolute;
             top: 2px;
@@ -231,25 +275,31 @@
             background: #e6e6e6;
             border-radius: 4px;
         }
+
         .control--radio .control__indicator {
             border-radius: 50%;
         }
+
         .control:hover input~.control__indicator,
         .control input:focus~.control__indicator {
             background: #ccc;
         }
+
         .control input:checked~.control__indicator {
             background: #6c63ff;
         }
+
         .control:hover input:not([disabled]):checked~.control__indicator,
         .control input:checked:focus~.control__indicator {
             background: #847dff;
         }
+
         .control input:disabled~.control__indicator {
             background: #e6e6e6;
             opacity: 0.9;
             pointer-events: none;
         }
+
         .control__indicator:after {
             font-family: 'icomoon';
             content: '\e5ca';
@@ -260,10 +310,12 @@
             -o-transition: .3s all ease;
             transition: .3s all ease;
         }
+
         .control input:checked~.control__indicator:after {
             display: block;
             color: #fff;
         }
+
         .control--checkbox .control__indicator:after {
             top: 50%;
             left: 50%;
@@ -272,14 +324,39 @@
             -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
         }
+
         .control--checkbox input:disabled~.control__indicator:after {
             border-color: #7b7b7b;
         }
+
         .control--checkbox input:disabled:checked~.control__indicator {
             background-color: #7e0cf5;
             opacity: .2;
         }
-        
+
+        .fa-facebook-square {
+            color: #3b5998;
+            background-image: linear-gradient(to bottom, transparent 20%, white 20%, white 93%, transparent 93%);
+            background-size: 55%;
+            background-position: 70% 0;
+            background-repeat: no-repeat;
+        }
+
+        .fa-twitter {
+            color: #00aced;
+            background-image: linear-gradient(to bottom, transparent 20%, white 20%, white 93%, transparent 93%);
+            background-size: 55%;
+            background-position: 70% 0;
+            background-repeat: no-repeat;
+        }
+
+        .fa-google {
+            background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
 </head>
 
@@ -295,27 +372,72 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="mb-4">
-                                <h3>User Sign In</h3>
+                                <h3>User SignUp</h3>
                             </div>
-                            <form id="login_form" method="post">
+                            <form id="signup_form" method="post">
 
-                                
                                 <div>
                                     <div class="form-group last mb-4">
-                                        <input type="text" class="form-control" placeholder="Username" name="username">
+                                        <input type="text" class="form-control" placeholder="First Name"
+                                            name="firstname">
                                     </div>
                                 </div>
-                                
                                 <div>
                                     <div class="form-group last mb-4">
-                                        <input type="password" class="form-control" placeholder="Password" name="password">
+                                        <input type="text" class="form-control" placeholder="Last Name" name="lastname">
                                     </div>
                                 </div>
-                                
-                                <span style="color: red;"> </span>
-                                <input type="submit" name="signup" id="signup" value="Log In" class="btn btn-block btn-primary">
+                                <div>
+                                    <div class="form-group last mb-4">
+                                        <input type="text" class="form-control" placeholder="Username" name="username"
+                                            required>
+                                        <span style="color: red;">
 
+                                        </span>
+                                    </div>
                                 </div>
+                                <div>
+                                    <div class="form-group last mb-4">
+                                        <input type="email" class="form-control" placeholder="Email" name="email">
+                                        <span style="color: red;">
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- <div>
+                                    <div class="form-group last mb-4">
+                                        <input type="number" class="form-control" placeholder="Contact No." name="c_no">
+                                        <span style="color: red;">
+                                           
+                                          </span>
+                                    </div>
+                                </div> -->
+                                <div>
+                                    <div class="form-group last mb-4">
+                                        <input type="password" class="form-control" placeholder="Password"
+                                            name="password" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group last mb-4">
+                                        <input type="password" class="form-control" placeholder="Confirm Password"
+                                            name="confirm_password" required>
+                                    </div>
+                                </div>
+
+                                <span style="color: red;">
+                                </span>
+                                <input type="submit" name="signup" id="signup" value="Sign Up"
+                                    class="btn btn-block btn-primary">
+                                <br>
+                                <div>
+                                    <div class="row">
+                                        <div class="d-flex align-items-center col-2"><u>Or</u></div>
+                                        <div class="col-10" id="my-signin2"></div>
+                                    </div>
+                                </div>
+                                <br>
+                                <p class="para-2">Already have an account? <a href="../login_doctor">Login here</a></p>
+
                             </form>
                         </div>
                     </div>
@@ -325,6 +447,28 @@
             </div>
         </div>
     </div>
+    <script>
+        function onSuccess(googleUser) {
+            console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+        }
+        function onFailure(error) {
+            console.log(error);
+        }
+        function renderButton() {
+            gapi.signin2.render('my-signin2', {
+                'scope': 'profile email',
+                'width': 240,
+                'height': 50,
+                'longtitle': true,
+                'theme': 'dark',
+                'onsuccess': onSuccess,
+                'onfailure': onFailure
+            });
+        }
+    </script>
+
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -336,28 +480,29 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script>
-        var api_url = "<%= apiurl%>/api/login/"
-        var formEl=document.forms.login_form;
+        var api_url = "<%= apiurl%>/api/signup/"
+        var formEl = document.forms.signup_form;
         formEl.onsubmit = (e) => {
             e.preventDefault();
-            var formData=new FormData(formEl);
-            fetch(api_url,{
-                method:'post',
-                body:formData
+            var formData = new FormData(formEl);
+            fetch(api_url, {
+                method: 'post',
+                body: formData
             })
-            .then(res => {
-                res.json().then(data => {
-                    if(res.status == 200){
-                        alert("Success!");
-                        document.cookie = "authtoken="+data.token
-                        window.location.href = window.location.origin
-                    }else{
-                        alert("Error occured!");
+                .then(res => {
+                    if (res.status === 201) {
+                        alert("Account Successfully created 🔥🔥🔥")
+                    }
+                    else{
+                        var data = res.json();
+                        data.then(a =>{
+                            alert(a.username)
+                        })
                     }
                 })
-            })
 
         }
-            </script>
-            </body>
-            </html>
+    </script>
+</body>
+
+</html>
