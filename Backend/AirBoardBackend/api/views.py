@@ -69,6 +69,28 @@ class TeamModelViewSet(viewsets.ModelViewSet):
 
 
 
+################################ SESSION VIEWSETS ################################
+# GET A SINGLE SESSION DATA
+class SessionAPI(APIView):
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
+
+    # GET CURRENT SESSION DATA
+    def get(self, request, session_id):
+        try:
+            session = Session.objects.get(pk=session_id)
+            session_serializer = SingleSessionSerializer(session)
+
+            team = session.team
+            if team.teacher != self.request.user and not team.students.filter(username=self.request.user).exists():
+                return Response({"message": "You are not in this team"}, status=status.HTTP_403_FORBIDDEN)
+            
+            return Response({"session": session_serializer.data})
+        except Exception as e:
+            print(e) 
+            return Response({"message": "Session not found"}, status=status.HTTP_404_NOT_FOUND)
+
+
 
 # CREATE DELETE AND UPDATE A SESSION
 class CreateDeleteSession(APIView):
