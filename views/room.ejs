@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airboard</title>
+    <script>
+        const ROOM_ID ="<%= roomId %>"
+    </script>
+    <script defer src="peerjs.min.js"></script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <link rel='stylesheet' href="/stylesheets/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <style>
+        #video-grid{
+            display: grid;
+            grid-template-columns: repeat(auto-fill,300px);
+            grid-template-rows: 300px;
+        }
+        video{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+    </style>
+</head>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div class="app">
+        <div class="controls">
+            <!-- <div class="title"> Sketch </div>
+            <input class="type">
+                <input type="radio" name="pen-type" id="pen-brush">
+                <label for="pen-brush">
+                    <i class="fa fa-pen-brush"></i>
+                </label>
+            </div> --> 
+
+            <div class="size">
+                <label for="pen-size">Size</label>
+                <input type="range" id="pen-size" min="1" max="20"/>
+            </div>
+
+            <div class="color">
+                <label for="pen-color">Color</label>
+                <input type="color" id="pen-color" value="#000">
+            </div>
+
+            <div class="actions">
+                <button id="reset-canvas">Reset</button>
+                <button id="save-canvas">Save</button>
+            </div>
+
+        </div>
+        <div id="canvas-wrapper"></div>
+    </div>
+    <p>Welcome to <%= title %></p>
+    <div class="container">
+        <video class="input_video" width="20%" height="20%" style="display:none"></video>
+        <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+    </div>
+    <div id="video-grid">
+    </div>
+</body>
+<!-- <script src="client.js" defer></script> -->
+<script>var ws_url="<%= ws_url %>"</script>
+<script defer src="tracker.js"></script>
+</html>
