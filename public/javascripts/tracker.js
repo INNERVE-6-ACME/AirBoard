@@ -160,11 +160,14 @@ ws.onmessage = (e) => {
     strokeWeight(e['stroke-size'])
     line(e['c1']['x'], e['c1']['y'], e['c2']['x'], e['c2']['y']);
   }
-  else {
+  else if (e["type"] === "erase") {
     if (document.getElementById("defaultCanvas0") != null)
       canvasCtx2 = document.getElementById("defaultCanvas0").getContext("2d");
       canvasCtx2.fillStyle = "rgba()0,0,0,0)";
       canvasCtx2.clearRect((1 - res1.x) * 1280 - 20, res1.y * 720 - 20, 40, 40);
+  }
+  else if(e["type"] == "reset"){
+    clear()
   }
 }
 
@@ -173,6 +176,9 @@ _("#reset-canvas").addEventListener("click",
     // canvasCtx2.fillStyle="rgba(0,0,0,0)"
     // canvasCtx2.clearRect(0, 0, canvasCtx2.width, canvasCtx2.height);
     clear()
+    ws.send(JSON.stringify({
+      "type": "reset"
+    }))
   });
 
 _("#save-canvas").addEventListener("click",
