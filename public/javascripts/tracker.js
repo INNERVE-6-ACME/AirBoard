@@ -56,7 +56,7 @@ function onResults(results) {
     {
       canvasCtx2 = document.getElementById("defaultCanvas0").getContext("2d");
       canvas2 = document.getElementById("defaultCanvas0")}
-    if (pos[1] === 1 && pos[2] === 1 && pos[3]===0 && pos[4]===0 && canvasCtx2 != null) {
+    if (pos[1] === 1 && pos[2] === 1 && pos[3]===1 && pos[4]===1 && canvasCtx2 != null) {
       // canvasCtx2.beginPath();
       // //console.log(res2.x, res2.y);
       // canvasCtx2.arc((1 - res1.x) * 1280, res1.y * 720, 10, 0, 2 * Math.PI);
