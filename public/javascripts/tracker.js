@@ -145,7 +145,8 @@ function mouseDragged(res1, res2, res4) {
       "type": "pen",
       "c1": { x: pmouseX, y: pmouseY },
       "c2": { x: mouseX, y: mouseY },
-      "stroke-size": size
+      "stroke-size": size,
+      "stroke-color": color,
     }))
   }
 }
@@ -158,6 +159,7 @@ ws.onmessage = (e) => {
   // console.log(e.c1.x)
   if (e["type"] === "pen") {
     strokeWeight(e['stroke-size'])
+    stroke(e['stroke-color'])
     line(e['c1']['x'], e['c1']['y'], e['c2']['x'], e['c2']['y']);
   }
   else if (e["type"] === "erase") {
