@@ -350,7 +350,7 @@
             .then(res => {
                 res.json().then(data => {
                     if(res.status == 200){
-                        alert("Success!");
+                        alert("Logged in successfully ✅✅✅");
                         document.cookie = "authtoken="+data.token
                         window.location.href = window.location.origin
                     }else{

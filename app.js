@@ -9,7 +9,7 @@ app.set("view engine","ejs")
 app.use(express.static("public"))
 
 app.get("/video",(req,res)=>{
-    res.redirect(`/${idgen()}`)
+    res.redirect(`/room/${idgen()}`)
 })
 
 
