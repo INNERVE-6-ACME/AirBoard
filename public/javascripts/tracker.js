@@ -39,6 +39,8 @@ function fingersUp(res4, total) {
 function onResults(results) {
   canvasCtx.save();
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+  canvasCtx.translate(width, 0);
+  canvasCtx.scale(-1, 1);
   canvasCtx.drawImage(
     results.image, 0, 0, canvasElement.width, canvasElement.height);
   if (results.multiHandLandmarks.length !== 0) {
