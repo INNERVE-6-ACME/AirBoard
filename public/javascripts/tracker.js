@@ -54,7 +54,7 @@ function onResults(results) {
     var pos = fingersUp(res4,results.multiHandLandmarks)
     if(document.getElementById("defaultCanvas0") != null)
      canvasCtx2=document.getElementById("defaultCanvas0").getContext("2d");
-    if(pos[1]===1 && pos[2]===1 && canvasCtx2!=null)
+    if(pos[1]===1 && pos[2]===1 && pos[3]==1 && canvasCtx2!=null)
     {
       // canvasCtx2.beginPath();
       // //console.log(res2.x, res2.y);
@@ -74,7 +74,8 @@ function onResults(results) {
       // strokeWeight(trackerSize)
       // canvasCtx2.stroke()
     }
-    else{
+    else if(pos[1]===1 && pos[2]===1 && canvasCtx2!=null)
+    {
     mouseDragged(res1,res2,res4)
     }
     // socket2.emit()
@@ -118,15 +119,16 @@ function mouseDragged(res1,res2,res4){
     //console.log(typeof(color))
     fill(color);
     stroke(color);
-    var x0=res4.x*1280;
-    var y0=res4.y*720;
-    var x1=res2.x*1280;
-    var y1=res2.y*720;
-    function distance(x0, y0, x1, y1){
-        return Math.hypot(x1 - x0, y1 - y0);
-    }
-    var dist=distance(x0, y0, x1, y1)
-    if(type == "pencil" && dist<=50){
+    // var x0=res4.x*1280;
+    // var y0=res4.y*720;
+    // var x1=res2.x*1280;
+    // var y1=res2.y*720;
+    // function distance(x0, y0, x1, y1){
+    //     return Math.hypot(x1 - x0, y1 - y0);
+    // }
+    // var dist=distance(x0, y0, x1, y1)
+    if(type == "pencil")
+    {
         let pmouseX=(1-res1.x)*1280,pmouseY=res1.y*720,mouseX=(1-res2.x)*1280,mouseY=res2.y*720
         strokeWeight(size)
         line(pmouseX, pmouseY, mouseX, mouseY)
