@@ -234,7 +234,7 @@
                                 <h5 class="title">${sessions[i].session_name}</h5>
                                 <p class="text-muted mt-3 mb-0">Started at : ${start}</p>
                                 <p class="text-muted mt-3 mb-0">Ended at : ${end}</p>
-                                <a href="<%= apiurl%>${sessions[i].board}"><button id="get-notes" class="btn btn-outline-info">Notes</button></a>
+                                <a href="<%= apiurl%>/media/${sessions[i].board}"><button id="get-notes" class="btn btn-outline-info">Notes</button></a>
                                 <div class="space">
                                 </div> 
                                 <a href="/session/${sessions[i].id}"><button id="enter-session" class="btn btn-outline-info">Enter Sesion</button></a>
