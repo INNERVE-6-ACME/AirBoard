@@ -62,8 +62,8 @@ function onResults(results) {
       // canvasCtx2.arc((1 - res1.x) * 1280, res1.y * 720, 10, 0, 2 * Math.PI);
       // strokeWeight(trackerSize)
 
-      canvasCtx2.fillStyle = 'white';
-      canvasCtx2.fillRect((1 - res1.x) * 1280 - 20, res1.y * 720 - 20, 40, 40);
+      canvasCtx2.fillStyle = "rgba()0,0,0,0)";
+      canvasCtx2.clearRect((1 - res1.x) * 1280 - 20, res1.y * 720 - 20, 40, 40);
       ws.send(JSON.stringify({
         "type": "erase",
         "c1": { x: (1 - res1.x), y: res1.y },
@@ -161,8 +161,8 @@ ws.onmessage = (e) => {
   else {
     if (document.getElementById("defaultCanvas0") != null)
       canvasCtx2 = document.getElementById("defaultCanvas0").getContext("2d");
-    canvasCtx2.fillStyle = 'white';
-    canvasCtx2.fillRect((1 - e["c1"]["x"]) * 1280 - 20, e["c1"]["y"] * 720 - 20, 40, 40);
+      canvasCtx2.fillStyle = "rgba()0,0,0,0)";
+      canvasCtx2.clearRect((1 - res1.x) * 1280 - 20, res1.y * 720 - 20, 40, 40);
   }
 }
 
