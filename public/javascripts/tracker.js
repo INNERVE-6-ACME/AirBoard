@@ -51,12 +51,6 @@ function onResults(results) {
     {
       canvasCtx2 = document.getElementById("defaultCanvas0").getContext("2d");
       canvas2 = document.getElementById("defaultCanvas0")}
-<<<<<<< HEAD
-    if (pos[1] === 1 && pos[2] === 1 && pos[3]===1 && pos[4]===1 && canvasCtx2 != null) {
-      let esize = parseInt(_("#eraser-size").value);
-      canvasCtx2.fillStyle = "rgba(0,0,0,0)";
-      canvasCtx2.clearRect((1 - res1.x) * 1280 - esize, res1.y * 720 - esize, esize*2, esize*2);
-=======
     if (pos[1] === 1 && pos[2] === 1 && pos[3]===0 && pos[4]===0 && canvasCtx2 != null) {
       // canvasCtx2.beginPath();
       // //console.log(res2.x, res2.y);
@@ -65,7 +59,6 @@ function onResults(results) {
 
       canvasCtx2.fillStyle = 'white';
       canvasCtx2.fillRect((1 - res1.x) * 1280 - 20, res1.y * 720 - 20, 40, 40);
->>>>>>> parent of ab45ffc (Merge branch 'main' of https://github.com/INNERVE-6-ACME/AirBoard)
       ws.send(JSON.stringify({
         "type": "erase",
         "c1": { x: (1 - res1.x), y: res1.y },
@@ -121,13 +114,9 @@ function mouseDragged(res1, res2, res4) {
   if (type == "pencil") {
     let pmouseX = (1 - res1.x) * 1280, pmouseY = res1.y * 720, mouseX = (1 - res2.x) * 1280, mouseY = res2.y * 720
     strokeWeight(size)
-<<<<<<< HEAD
-    stroke(color)
-=======
     //var mat = cv.imread(canvas2);
     //let p1 = new cv.Point(pmouseX, pmouseY);
     //let p2 = new cv.Point(mouseX, mouseY);
->>>>>>> parent of ab45ffc (Merge branch 'main' of https://github.com/INNERVE-6-ACME/AirBoard)
     line(pmouseX, pmouseY, mouseX, mouseY)
     ws.send(JSON.stringify({
       "type": "pen",
@@ -148,17 +137,8 @@ ws.onmessage = (e) => {
   else {
     if (document.getElementById("defaultCanvas0") != null)
       canvasCtx2 = document.getElementById("defaultCanvas0").getContext("2d");
-<<<<<<< HEAD
-      canvasCtx2.fillStyle = "rgba(0,0,0,0)";
-      canvasCtx2.clearRect(( e['c1']['x']) * 1280 - esize,e['c1']['y'] * 720 - esize, esize*2, esize*2);
-    }
-  }
-  else if(e["type"] == "reset"){
-    clear()
-=======
     canvasCtx2.fillStyle = 'white';
     canvasCtx2.fillRect((1 - e["c1"]["x"]) * 1280 - 20, e["c1"]["y"] * 720 - 20, 40, 40);
->>>>>>> parent of ab45ffc (Merge branch 'main' of https://github.com/INNERVE-6-ACME/AirBoard)
   }
 }
 
