@@ -145,7 +145,8 @@ function mouseDragged(res1, res2, res4) {
       "type": "pen",
       "c1": { x: pmouseX, y: pmouseY },
       "c2": { x: mouseX, y: mouseY },
-      "stroke-size": size
+      "stroke-size": size,
+      "colour":color
     }))
   }
 }
