@@ -64,7 +64,7 @@ function onResults(results) {
       // canvasCtx2.arc((1 - res1.x) * 1280, res1.y * 720, 10, 0, 2 * Math.PI);
       // strokeWeight(trackerSize)
 
-      canvasCtx2.fillStyle = "rgba()0,0,0,0)";
+      canvasCtx2.fillStyle = "rgba(0,0,0,0)";
       canvasCtx2.clearRect((1 - res1.x) * 1280 - 20, res1.y * 720 - 20, 40, 40);
       ws.send(JSON.stringify({
         "type": "erase",
@@ -146,7 +146,7 @@ function mouseDragged(res1, res2, res4) {
       "c1": { x: pmouseX, y: pmouseY },
       "c2": { x: mouseX, y: mouseY },
       "stroke-size": size,
-      "colour":color
+      "stroke-color": color,
     }))
   }
 }
@@ -159,13 +159,14 @@ ws.onmessage = (e) => {
   // console.log(e.c1.x)
   if (e["type"] === "pen") {
     strokeWeight(e['stroke-size'])
+    stroke(e['stroke-color'])
     line(e['c1']['x'], e['c1']['y'], e['c2']['x'], e['c2']['y']);
   }
   else if (e["type"] === "erase") {
     if (document.getElementById("defaultCanvas0") != null)
-      canvasCtx2 = document.getElementById("defaultCanvas0").getContext("2d");
-      canvasCtx2.fillStyle = "rgba()0,0,0,0)";
-      canvasCtx2.clearRect((1 - res1.x) * 1280 - 20, res1.y * 720 - 20, 40, 40);
+       canvasCtx2 = document.getElementById("defaultCanvas0").getContext("2d");
+      canvasCtx2.fillStyle = "rgba(0,0,0,0)";
+      canvasCtx2.clearRect((1 - e["c1"]["x"]) * 1280 - 20, e["c1"]["x"] * 720 - 20, 40, 40);
   }
   else if(e["type"] == "reset"){
     clear()
