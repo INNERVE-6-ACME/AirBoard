@@ -10,9 +10,6 @@
         const ROOM_ID ="<%= roomId %>"
     </script>
     <script src="https://docs.opencv.org/3.4.0/opencv.js" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Nunito+Sans:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel='stylesheet' href="/stylesheets/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
@@ -20,12 +17,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
     <style>
-        body{
-            background-color: #74EBD5;
-        background-image: linear-gradient(90deg, #0077ff 0%, #91d2f0 100%);
-        font-family: 'Acme', sans-serif;
-
-        }
         #video-grid{
             display: grid;
             grid-template-columns: repeat(auto-fill,300px);
@@ -40,40 +31,34 @@
 </head>
   </head>
   <body>
-      <center>
-        <h1><%= title %></h1>
-        <div class="app" style="width: 100%;">
-            <div class="controls">
-    
-                <div class="size">
-                    <label for="pen-size">Size</label>
-                    <input type="range" id="pen-size" min="1" max="20"/>
-                </div>
+    <h1><%= title %></h1>
+    <div class="app">
+        <div class="controls">
 
-                <div class="size">
-                    <label for="eraser-size">Eraser</label>
-                    <input type="range" id="eraser-size" min="1" max="20"/>
-                </div>
-    
-                <div class="color">
-                    <label for="pen-color">Color</label>
-                    <input type="color" id="pen-color" value="#000">
-                </div>
-    
-                <div class="actions">
-                    <button class="btn btn-outline-secondary" id="reset-canvas">Reset</button>
-                    <button class="btn btn-outline-secondary" id="save_canvas_cloud">Save to Cloud</button>
-                    <button class="btn btn-outline-secondary" id="save-canvas">Download</button>
-                </div>
-    
+            <div class="size">
+                <label for="pen-size">Size</label>
+                <input type="range" id="pen-size" min="1" max="20"/>
             </div>
-            <div id="canvas-wrapper"></div>
+
+            <div class="color">
+                <label for="pen-color">Color</label>
+                <input type="color" id="pen-color" value="#000">
+            </div>
+
+            <div class="actions">
+                <button id="reset-canvas">Reset</button>
+                <button id="save_canvas_cloud">Save to Cloud</button>
+                <button id="save-canvas">Download</button>
+            </div>
+
         </div>
-        <div class="container">
-            <video class="input_video" width="20%" height="20%" style="display:none"></video>
-            <canvas class="output_canvas" width="1280px" height="720px"></canvas>
-        </div>
-    </center>
+        <div id="canvas-wrapper"></div>
+    </div>
+    <p>Welcome to <%= title %></p>
+    <div class="container">
+        <video class="input_video" width="20%" height="20%" style="display:none"></video>
+        <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+    </div>
     <div id="video-grid">
     </div>
 </body>
@@ -82,10 +67,9 @@
     var ws_url="<%= ws_url %>"
     var api_url="<%= api_url %>"
     var roomId="<%= roomId %>"
+
+    document.getElementById("pen-color").value = "#ff0000"
 </script>
 <script defer src="/javascripts/tracker.js"></script>
-<script>
-    alert("Instructions for using board are as follows :- \n1. Use two fingers to navigate on the screen \n2. Use just index finger for drawing on the canvas\n3. Use four fingers to toglle erase mode.")
-</script>
 
 </html>
