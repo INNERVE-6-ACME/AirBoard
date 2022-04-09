@@ -190,11 +190,11 @@ _("#save_canvas_cloud").addEventListener("click", () => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Token " + token
+      "Authorization": "Token " + document.cookie.valueOf('authtoken').split("authtoken=")[1].split(";")[0]
     },
     body: JSON.stringify(data)
   })
-    .then(response => {
-
-    })
+  .then(response => {
+    
+  })
 })

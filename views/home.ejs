@@ -142,9 +142,13 @@
                 })
 
         </script>
-        <script type="text/javascript">
+
+        <script>
+            if(!document.cookie.valueOf('authtoken').includes('authtoken')){
+                alert("Login Required");
+            }
+
             var link1 = document.getElementById("link1");
-            
             link1.onclick = () => {
                 document.cookie = document.cookie + ";max-age=0"
                 alert("Logged out successfully ✅✅✅");
