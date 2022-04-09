@@ -15,7 +15,7 @@
     #mybutton {
         position: relative;
         margin-top: 1%;
-        margin-right: 3%;
+        left: 57vw;
     }
 
     .logout-button {
@@ -82,9 +82,7 @@
             </div>
         </div>
 
-        <div id="mybutton">
-            <button id="create_team" class="btn btn-outline-secondary">Create Team</button>
-        </div>
+        
         <script>
             var api_url = "<%= apiurl%>/api/teams/"
             var teams = {};
@@ -97,6 +95,7 @@
                     teams = data.teams
                     var par = document.getElementById("content")
                     console.log(teams);
+
                     for (var i = 0; i < teams.length; i++) {
                         var start = teams[i].created_at.split('T')[0].split("-")
                         start = new Date(start[0], start[1] - 1, start[2])
@@ -134,6 +133,12 @@
 
                         par.innerHTML += el
                     }
+                    if(data.is_teacher){
+                        var pr=`<div id="mybutton">
+                            <button id="create_team" class="btn btn-outline-secondary">Create Team</button>
+                        </div>  `
+                        par.innerHTML += pr
+                    }
                 })
 
         </script>
@@ -142,7 +147,7 @@
             
             link1.onclick = () => {
                 document.cookie = document.cookie + ";max-age=0"
-                alert("Logged out successfully ✅✅");
+                alert("Logged out successfully ✅✅✅");
                 window.location.href = "/login"
             }
         </script>
