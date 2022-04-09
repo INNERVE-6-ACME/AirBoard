@@ -59,7 +59,7 @@
                         <a href="#"><span class="fa fa-user mr-3"></span> Members</a>
                     </li>
                     <li>
-                        <a href="#"><span class="fa fa-paper-plane mr-3"></span> Chats</a>
+                        <a href="/video"><span class="fa fa-paper-plane mr-3"></span>Video Room</a>
                     </li>
                     <li>
                         <a href="#" id="link1"><span class="fa fa-sign-out mr-3"></span>Logout</a>
@@ -121,8 +121,12 @@
                                         <li class="widget-49-meeting-item"><span>Created on : ${start}</span></li>
                                     </ul>
                                     <div class="widget-49-meeting-action">
+                                        <a href="/chat/${teams[i].id}" class="btn btn-sm btn-flash-border-success">Chats</a>
+                                    </div>
+                                    <div class="widget-49-meeting-action">
                                         <a href="/sessions/${teams[i].id}" class="btn btn-sm btn-flash-border-success">View Sessions</a>
                                     </div>
+    
                                 </div>
                             </div>
                         </div>
