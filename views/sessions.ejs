@@ -34,6 +34,9 @@
         bottom: 2vh;
         left: 87vw;
       }
+      .action_btn{
+          display: inline;
+      }
     </style>
   </head>
 
@@ -53,35 +56,33 @@
       </div>
 
       <div class="row" id="content"></div>
-
-      <div class="d-inline-flex flex-row">
-        <div>
-          <button
-            type="button"
-            id="mybutton"
-            class="btn btn-outline-secondary"
-            data-toggle="modal"
-            data-target="#create-teams"
-          >
-            Create Session
-          </button>
-        </div>
-        <div>
-          <button
-            type="button"
-            id="mybutton2"
-            class="btn btn-outline-secondary"
-            data-toggle="modal"
-            data-target="#add-students"
-          >
-            Add Student
-          </button>
-        </div>
-      </div>
     </div>
 
     <!-- Button trigger modal -->
-    
+    <div class="d-flex flex-row action_btn">
+      <div>
+        <button
+          type="button"
+          id="mybutton"
+          class="btn btn-outline-secondary action_btn"
+          data-toggle="modal"
+          data-target="#create-teams"
+        >
+          Create Session
+        </button>
+      </div>
+      <div>
+        <button
+          type="button"
+          id="mybutton2"
+          class="btn btn-outline-secondary action_btn"
+          data-toggle="modal"
+          data-target="#add-students"
+        >
+          Add Student
+        </button>
+      </div>
+    </div>
     <!-- Modal -->
     <div
       class="modal fade"
