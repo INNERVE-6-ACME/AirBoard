@@ -39,6 +39,8 @@ function fingersUp(res4, total) {
 function onResults(results) {
   canvasCtx.save();
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+  canvasCtx.translate(width, 0);
+  canvasCtx.scale(-1, 1);
   canvasCtx.drawImage(
     results.image, 0, 0, canvasElement.width, canvasElement.height);
   if (results.multiHandLandmarks.length !== 0) {
@@ -56,14 +58,14 @@ function onResults(results) {
     {
       canvasCtx2 = document.getElementById("defaultCanvas0").getContext("2d");
       canvas2 = document.getElementById("defaultCanvas0")}
-    if (pos[1] === 1 && pos[2] === 1 && pos[3]===0 && pos[4]===0 && canvasCtx2 != null) {
+    if (pos[1] === 1 && pos[2] === 1 && pos[3]===1 && pos[4]===1 && canvasCtx2 != null) {
       // canvasCtx2.beginPath();
       // //console.log(res2.x, res2.y);
       // canvasCtx2.arc((1 - res1.x) * 1280, res1.y * 720, 10, 0, 2 * Math.PI);
       // strokeWeight(trackerSize)
 
-      canvasCtx2.fillStyle = 'white';
-      canvasCtx2.fillRect((1 - res1.x) * 1280 - 20, res1.y * 720 - 20, 40, 40);
+      canvasCtx2.fillStyle = "rgba(0,0,0,0)";
+      canvasCtx2.clearRect((1 - res1.x) * 1280 - 20, res1.y * 720 - 20, 40, 40);
       ws.send(JSON.stringify({
         "type": "erase",
         "c1": { x: (1 - res1.x), y: res1.y },
@@ -132,6 +134,7 @@ function mouseDragged(res1, res2, res4) {
   if (type == "pencil") {
     let pmouseX = (1 - res1.x) * 1280, pmouseY = res1.y * 720, mouseX = (1 - res2.x) * 1280, mouseY = res2.y * 720
     strokeWeight(size)
+    stroke(color)
     //var mat = cv.imread(canvas2);
     //let p1 = new cv.Point(pmouseX, pmouseY);
     //let p2 = new cv.Point(mouseX, mouseY);
@@ -143,7 +146,8 @@ function mouseDragged(res1, res2, res4) {
       "type": "pen",
       "c1": { x: pmouseX, y: pmouseY },
       "c2": { x: mouseX, y: mouseY },
-      "stroke-size": size
+      "stroke-size": size,
+      "stroke-color": color,
     }))
   }
 }
@@ -156,13 +160,19 @@ ws.onmessage = (e) => {
   // console.log(e.c1.x)
   if (e["type"] === "pen") {
     strokeWeight(e['stroke-size'])
+    stroke(e['stroke-color'])
     line(e['c1']['x'], e['c1']['y'], e['c2']['x'], e['c2']['y']);
   }
-  else {
-    if (document.getElementById("defaultCanvas0") != null)
+  else if (e["type"] === "erase") {
+    if (document.getElementById("defaultCanvas0") != null) {
       canvasCtx2 = document.getElementById("defaultCanvas0").getContext("2d");
-    canvasCtx2.fillStyle = 'white';
-    canvasCtx2.fillRect((1 - e["c1"]["x"]) * 1280 - 20, e["c1"]["y"] * 720 - 20, 40, 40);
+      canvasCtx2.fillStyle = "rgba(0,0,0,0)";
+      canvasCtx2.clearRect(( e['c1']['x']) * 1280 - 20,e['c1']['y'] * 720 - 20, 40, 40);
+    }
+    console.log(e);
+  }
+  else if(e["type"] == "reset"){
+    clear()
   }
 }
 
@@ -171,6 +181,9 @@ _("#reset-canvas").addEventListener("click",
     // canvasCtx2.fillStyle="rgba(0,0,0,0)"
     // canvasCtx2.clearRect(0, 0, canvasCtx2.width, canvasCtx2.height);
     clear()
+    ws.send(JSON.stringify({
+      "type": "reset"
+    }))
   });
 
 _("#save-canvas").addEventListener("click",
