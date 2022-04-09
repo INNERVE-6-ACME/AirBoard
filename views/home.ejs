@@ -15,7 +15,7 @@
     #mybutton {
         position: relative;
         margin-top: 1%;
-        margin-right: 3%;
+        left: 57vw;
     }
 
     .logout-button {
@@ -59,13 +59,7 @@
                         <a href="#"><span class="fa fa-user mr-3"></span> Members</a>
                     </li>
                     <li>
-                        <a href="#"><span class="fa fa-briefcase mr-3"></span> Meetings</a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="fa fa-sticky-note mr-3"></span> Assignments</a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="fa fa-paper-plane mr-3"></span> Chats</a>
+                        <a href="/chats"><span class="fa fa-paper-plane mr-3"></span> Chats</a>
                     </li>
                     <li>
                         <a href="#" id="link1"><span class="fa fa-sign-out mr-3"></span>Logout</a>
@@ -82,9 +76,7 @@
             </div>
         </div>
 
-        <div id="mybutton">
-            <button id="create_team" class="btn btn-outline-secondary">Create Team</button>
-        </div>
+        
         <script>
             var api_url = "<%= apiurl%>/api/teams/"
             var teams = {};
@@ -97,11 +89,19 @@
                     teams = data.teams
                     var par = document.getElementById("content")
                     console.log(teams);
+
                     for (var i = 0; i < teams.length; i++) {
-                        var start = teams[i].created_at.split('T')[0].split("-")
+                        var start = teams[i].updated_at.split('T')[0].split("-")
                         start = new Date(start[0], start[1] - 1, start[2])
                         var month = start.toLocaleString("en-us", { month: 'long' });
                         var date = start.getDate()
+
+                        var start = teams[i].created_at.split('T')[0].split("-")
+                        start = new Date(start[0], start[1], start[2])
+                        start = start.toDateString()
+
+                        
+                        var nos = teams[i].students.length;
                         var el = `<div class="col-lg-6">
                         <div class="card card-margin">
                             <div class="card-header no-border">
@@ -114,15 +114,11 @@
                                             <span class="widget-49-date-day">${date}</span>
                                             <span class="widget-49-date-month">${month}</span>
                                         </div>
-                                        <div class="widget-49-meeting-info">
-                                            <span class="widget-49-pro-title">PRO-027865 Opera module</span>
-                                            <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span>
-                                        </div>
                                     </div>
                                     <ul class="widget-49-meeting-points">
                                         <li class="widget-49-meeting-item"><span>Teacher : ${teams[i].teacher.username}</span></li>
-                                        <li class="widget-49-meeting-item"><span>Time-line has been changed</span></li>
-                                        <li class="widget-49-meeting-item"><span>Received approval to start wire-frame</span></li>
+                                        <li class="widget-49-meeting-item"><span>Number of students : ${nos}</span></li>
+                                        <li class="widget-49-meeting-item"><span>Created on : ${start}</span></li>
                                     </ul>
                                     <div class="widget-49-meeting-action">
                                         <a href="/sessions/${teams[i].id}" class="btn btn-sm btn-flash-border-success">View Sessions</a>
@@ -133,6 +129,12 @@
                     </div>`
 
                         par.innerHTML += el
+                    }
+                    if(data.is_teacher){
+                        var pr=`<div id="mybutton">
+                            <button id="create_team" class="btn btn-outline-secondary">Create Team</button>
+                        </div>  `
+                        par.innerHTML += pr
                     }
                 })
 
@@ -146,7 +148,7 @@
             var link1 = document.getElementById("link1");
             link1.onclick = () => {
                 document.cookie = document.cookie + ";max-age=0"
-                alert("Logged out successfully ✅✅");
+                alert("Logged out successfully ✅✅✅");
                 window.location.href = "/login"
             }
         </script>

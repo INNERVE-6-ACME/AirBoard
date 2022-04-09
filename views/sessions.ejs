@@ -1,141 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
     <title>Teams Page</title>
-    <link rel="stylesheet" href="/stylesheets/sessions.css">
+    <link rel="stylesheet" href="/stylesheets/sessions.css" />
 
     <style>
-        .space {
-            width: 4px;
-            height: auto;
-            display: inline-block;
-        }
+      .space {
+        width: 4px;
+        height: auto;
+        display: inline-block;
+      }
 
-        #mybutton {
-            position: fixed;
-            bottom: 8vh;
-            left: 87vw;
-        }
-        #mybutton2 {
-            position: fixed;
-            bottom: 2vh;
-            left: 87vw;
-        }
+      #mybutton {
+        position: fixed;
+        bottom: 8vh;
+        left: 87vw;
+      }
+      #mybutton2 {
+        position: fixed;
+        bottom: 2vh;
+        left: 87vw;
+      }
+      .action_btn{
+          display: inline;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <div class="section-title text-center mb-4 pb-2">
-                    <h4 class="title mb-4">Our Features</h4>
-                    <p class="text-muted para-desc mx-auto mb-0">There is now an abundance of readable dummy texts.
-                        These are usually used when a text is required purely to fill a space.</p>
-                </div>
-            </div>
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="section-title text-center mb-4 pb-2">
+            <h4 class="title mb-4">Sessions</h4>
+            <p class="text-muted para-desc mx-auto mb-0">
+              There is the place where you monitor all your previouys and
+              upcomning sessions. The notes get updated regularly in the
+              sessions.
+            </p>
+          </div>
         </div>
+      </div>
 
-        <div class="row" id="content">
-        </div>
+      <div class="row" id="content"></div>
     </div>
-    
+
     <!-- Button trigger modal -->
-    <div>
-    <button type="button" id="mybutton" class="btn btn-outline-secondary" data-toggle="modal"
-        data-target="#create-teams">
-        Create Session
-    </button>
-    <button type="button" id="mybutton2" class="btn btn-outline-secondary" data-toggle="modal"
-        data-target="#add-students">
-        Add Student
-    </button>
+    <div class="d-flex flex-row action_btn">
+      <div>
+        <button
+          type="button"
+          id="mybutton"
+          class="btn btn-outline-secondary action_btn"
+          data-toggle="modal"
+          data-target="#create-teams"
+        >
+          Create Session
+        </button>
+      </div>
+      <div>
+        <button
+          type="button"
+          id="mybutton2"
+          class="btn btn-outline-secondary action_btn"
+          data-toggle="modal"
+          data-target="#add-students"
+        >
+          Add Student
+        </button>
+      </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="create-teams" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Session</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="create_form">
-                        <div class="form-group" id="">
-                            <label for="session-name" class="col-form-label">Session Name:</label>
-                            <input type="text" class="form-control" id="session_name">
-                        </div>
-                        <div class="form-group">
-                            <label for="start-time" class="col-form-label">Start Time:</label>
-                            <input class="form-control" type="datetime-local" id="start_time" placeholder="Start time">
-                        </div>
-                        <div class="form-group">
-                            <label for="end-time" class="col-form-label">End Time:</label>
-                            <input class="form-control" type="datetime-local" id="end_time" placeholder="End time">
-                        </div> 
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" id="create_session_btn" class="btn btn-primary">Create Session</button>
-                </div>
-            </div>
+    <div
+      class="modal fade"
+      id="create-teams"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create Session</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="create_form">
+              <div class="form-group" id="">
+                <label for="session-name" class="col-form-label"
+                  >Session Name:</label
+                >
+                <input type="text" class="form-control" id="session_name" />
+              </div>
+              <div class="form-group">
+                <label for="start-time" class="col-form-label"
+                  >Start Time:</label
+                >
+                <input
+                  class="form-control"
+                  type="datetime-local"
+                  id="start_time"
+                  placeholder="Start time"
+                />
+              </div>
+              <div class="form-group">
+                <label for="end-time" class="col-form-label">End Time:</label>
+                <input
+                  class="form-control"
+                  type="datetime-local"
+                  id="end_time"
+                  placeholder="End time"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              id="create_session_btn"
+              class="btn btn-primary"
+            >
+              Create Session
+            </button>
+          </div>
         </div>
+      </div>
     </div>
     <!-- <Modal 2> -->
-        <div class="modal fade" id="add-students" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add Students</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="create_form">
-                            <div class="form-group" id="">
-                                <label for="session-name" class="col-form-label">User Name:</label>
-                                <input type="text" class="form-control" id="user_name">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" id="add_student_btn" class="btn btn-primary">Add Student</button>
-                    </div>
-                </div>
-            </div>
+    <div
+      class="modal fade"
+      id="add-students"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Students</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="create_form">
+              <div class="form-group" id="">
+                <label for="session-name" class="col-form-label"
+                  >User Name:</label
+                >
+                <input type="text" class="form-control" id="user_name" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" id="add_student_btn" class="btn btn-primary">
+              Add Student
+            </button>
+          </div>
         </div>
+      </div>
+    </div>
     <script>
-        var api_url = "<%= apiurl%>/api/teams/<%= team_id%>"
-        fetch(api_url, {
-            method: 'get',
-            headers: { "Authorization": `Token ${document.cookie.valueOf('authtoken').split("authtoken=")[1].split(";")[0]}` }
+      var api_url = "<%= apiurl%>/api/teams/<%= team_id%>";
+      fetch(api_url, {
+        method: "get",
+        headers: {
+          Authorization: `Token ${
+            document.cookie
+              .valueOf("authtoken")
+              .split("authtoken=")[1]
+              .split(";")[0]
+          }`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          var sessions = data.sessions;
+          var par = document.getElementById("content");
 
-        })
-            .then(res => res.json())
-            .then(data => {
-                var sessions = data.sessions
-                var par = document.getElementById("content")
-
-                for (var i = 0; i < sessions.length; i++) {
-                    var start = sessions[i].start_time.split('T')[0].split("-")
-                    start = new Date(start[0], start[1], start[2])
-                    start = start.toDateString()
-                    var end = sessions[i].end_time.split('T')[0].split("-")
-                    end = new Date(end[0], end[1], end[2])
-                    end = end.toDateString()
-                    var el = `
+          for (var i = 0; i < sessions.length; i++) {
+            var start = sessions[i].start_time.split("T")[0].split("-");
+            start = new Date(start[0], start[1], start[2]);
+            start = start.toDateString();
+            var end = sessions[i].end_time.split("T")[0].split("-");
+            end = new Date(end[0], end[1], end[2]);
+            end = end.toDateString();
+            var el = `
                     <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                         <div class="card service-wrapper rounded border-0 shadow p-4">
                             <div class="icon text-center text-custom h1 shadow rounded bg-white">
@@ -156,130 +245,144 @@
                             </div>
                         </div>
                     </div>
-                    `
+                    `;
 
-                    par.innerHTML += el
-                }
-            })
-
+            par.innerHTML += el;
+          }
+        });
     </script>
 
     <script>
-        var api_url = "<%= apiurl%>/api/addsession/"
-        document.getElementById("create_session_btn").onclick = () => {
-            fetch(api_url, {
-                method: 'post',
-                headers: {
-                    "Authorization": `Token ${document.cookie.valueOf('authtoken').split("authtoken=")[1].split(";")[0]}`,
-                    'Content-Type':"application/json"
-                },
-                body: JSON.stringify({
-                    team_id:"<%= team_id %>",
-                    session_name: document.getElementById("session_name").value,
-                    start_time:document.getElementById("start_time").value,
-                    end_time:document.getElementById("end_time").value
-                })
-            })
-                .then(res => {
-                    if (res.status === 200 || res.status === 201) {
-                        alert("Session Successfully created 🔥🔥🔥")
-                        window.location.reload()
-                    }
-                    else{
-                        alert("Something went wrong with the session creation !")
-                    }
-                })
-        }
+      var api_url = "<%= apiurl%>/api/addsession/";
+      document.getElementById("create_session_btn").onclick = () => {
+        fetch(api_url, {
+          method: "post",
+          headers: {
+            Authorization: `Token ${
+              document.cookie
+                .valueOf("authtoken")
+                .split("authtoken=")[1]
+                .split(";")[0]
+            }`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            team_id: "<%= team_id %>",
+            session_name: document.getElementById("session_name").value,
+            start_time: document.getElementById("start_time").value,
+            end_time: document.getElementById("end_time").value,
+          }),
+        }).then((res) => {
+          if (res.status === 200 || res.status === 201) {
+            alert("Session Successfully created 🔥🔥🔥");
+            window.location.reload();
+          } else {
+            alert("Something went wrong with the session creation !");
+          }
+        });
+      };
     </script>
 
     <script>
-        var api_url = "<%= apiurl%>/api/teams/<%= team_id%>"
-        fetch(api_url, {
-            method: 'get',
-            headers: { "Authorization": `Token ${document.cookie.valueOf('authtoken').split("authtoken=")[1].split(";")[0]}` }
+      var api_url = "<%= apiurl%>/api/teams/<%= team_id%>";
+      fetch(api_url, {
+        method: "get",
+        headers: {
+          Authorization: `Token ${
+            document.cookie
+              .valueOf("authtoken")
+              .split("authtoken=")[1]
+              .split(";")[0]
+          }`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          var sessions = data.sessions;
+          console.log(data);
+          // var par = document.getElementById("content")
 
-        })
-            .then(res => res.json())
-            .then(data => {
-                var sessions = data.sessions
-                console.log(data)
-                // var par = document.getElementById("content")
+          // for (var i = 0; i < sessions.length; i++) {
+          //     var start = sessions[i].start_time.split('T')[0].split("-")
+          //     start = new Date(start[0], start[1], start[2])
+          //     start = start.toDateString()
+          //     var end = sessions[i].end_time.split('T')[0].split("-")
+          //     end = new Date(end[0], end[1], end[2])
+          //     end = end.toDateString()
+          //     var el = `
+          //     <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
+          //         <div class="card service-wrapper rounded border-0 shadow p-4">
+          //             <div class="icon text-center text-custom h1 shadow rounded bg-white">
+          //                 <span class="uim-svg" style=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><rect width="20" height="15" x="2" y="3" class="uim-tertiary" rx="3"></rect><path class="uim-primary" d="M16,21H8a.99992.99992,0,0,1-.832-1.55469l4-6a1.03785,1.03785,0,0,1,1.66406,0l4,6A.99992.99992,0,0,1,16,21Z"></path></svg></span>
+          //             </div>
+          //             <div class="content mt-4">
+          //                 <h5 class="title">${sessions[i].session_name}</h5>
+          //                 <p class="text-muted mt-3 mb-0">Started at : ${start}</p>
+          //                 <p class="text-muted mt-3 mb-0">Ended at : ${end}</p>
+          //                 <a href="<%= apiurl%>/media/${sessions[i].board}"><button id="get-notes" class="btn btn-outline-info">Notes</button></a>
+          //                 <div class="space">
+          //                 </div>
+          //                 <a href="/session/${sessions[i].id}"><button id="enter-session" class="btn btn-outline-info">Enter Sesion</button></a>
 
-                // for (var i = 0; i < sessions.length; i++) {
-                //     var start = sessions[i].start_time.split('T')[0].split("-")
-                //     start = new Date(start[0], start[1], start[2])
-                //     start = start.toDateString()
-                //     var end = sessions[i].end_time.split('T')[0].split("-")
-                //     end = new Date(end[0], end[1], end[2])
-                //     end = end.toDateString()
-                //     var el = `
-                //     <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                //         <div class="card service-wrapper rounded border-0 shadow p-4">
-                //             <div class="icon text-center text-custom h1 shadow rounded bg-white">
-                //                 <span class="uim-svg" style=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><rect width="20" height="15" x="2" y="3" class="uim-tertiary" rx="3"></rect><path class="uim-primary" d="M16,21H8a.99992.99992,0,0,1-.832-1.55469l4-6a1.03785,1.03785,0,0,1,1.66406,0l4,6A.99992.99992,0,0,1,16,21Z"></path></svg></span>
-                //             </div>
-                //             <div class="content mt-4">
-                //                 <h5 class="title">${sessions[i].session_name}</h5>
-                //                 <p class="text-muted mt-3 mb-0">Started at : ${start}</p>
-                //                 <p class="text-muted mt-3 mb-0">Ended at : ${end}</p>
-                //                 <a href="<%= apiurl%>/media/${sessions[i].board}"><button id="get-notes" class="btn btn-outline-info">Notes</button></a>
-                //                 <div class="space">
-                //                 </div> 
-                //                 <a href="/session/${sessions[i].id}"><button id="enter-session" class="btn btn-outline-info">Enter Sesion</button></a>
-                
-                //             </div>
-                //             <div class="big-icon h1 text-custom">
-                //                 <span class="uim-svg" style=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><rect width="20" height="15" x="2" y="3" class="uim-tertiary" rx="3"></rect><path class="uim-primary" d="M16,21H8a.99992.99992,0,0,1-.832-1.55469l4-6a1.03785,1.03785,0,0,1,1.66406,0l4,6A.99992.99992,0,0,1,16,21Z"></path></svg></span>
-                //             </div>
-                //         </div>
-                //     </div>
-                //     `
+          //             </div>
+          //             <div class="big-icon h1 text-custom">
+          //                 <span class="uim-svg" style=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><rect width="20" height="15" x="2" y="3" class="uim-tertiary" rx="3"></rect><path class="uim-primary" d="M16,21H8a.99992.99992,0,0,1-.832-1.55469l4-6a1.03785,1.03785,0,0,1,1.66406,0l4,6A.99992.99992,0,0,1,16,21Z"></path></svg></span>
+          //             </div>
+          //         </div>
+          //     </div>
+          //     `
 
-                //     par.innerHTML += el
+          //     par.innerHTML += el
 
-                // }
-            })
-
+          // }
+        });
     </script>
 
-<script>
-    var api_url = "<%= apiurl%>/api/addstudent/"
-    document.getElementById("add_student_btn").onclick = () => {
+    <script>
+      var api_url = "<%= apiurl%>/api/addstudent/";
+      document.getElementById("add_student_btn").onclick = () => {
         fetch(api_url, {
-            method: 'post',
-            headers: {
-                "Authorization": `Token ${document.cookie.valueOf('authtoken').split("authtoken=")[1].split(";")[0]}`,
-                'Content-Type':"application/json"
-            },
-            body: JSON.stringify({
-                team_id:"<%= team_id %>",
-                student_username: document.getElementById("user_name").value
-            })
-        })
-            .then(res => {
-                if (res.status === 200 || res.status === 201) {
-                    alert("Student Successfully added 🔥🔥🔥")
-                    window.location.reload()
-                }
-                else{
-                    alert("Something went wrong with the student addition to team !")
-                }
-            })
-    }
-</script>
+          method: "post",
+          headers: {
+            Authorization: `Token ${
+              document.cookie
+                .valueOf("authtoken")
+                .split("authtoken=")[1]
+                .split(";")[0]
+            }`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            team_id: "<%= team_id %>",
+            student_username: document.getElementById("user_name").value,
+          }),
+        }).then((res) => {
+          if (res.status === 200 || res.status === 201) {
+            alert("Student Successfully added 🔥🔥🔥");
+            window.location.reload();
+          } else {
+            alert("Something went wrong with the student addition to team !");
+          }
+        });
+      };
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
 
-</body>
-
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
