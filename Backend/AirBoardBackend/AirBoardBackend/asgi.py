@@ -11,9 +11,12 @@ import os
 
 from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
-import sockets.routing
+import django
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Airboard.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'AirBoardBackend.settings')
+django.setup()
+
+import sockets.routing
 
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
